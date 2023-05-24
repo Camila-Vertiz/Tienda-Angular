@@ -7,6 +7,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { SingUpComponent } from './singUp/singUp.component';
+
+import { FooterComponent } from './footer/footer.component';
+
 import { CarritoComponent } from './carrito/carrito.component';
 import { CasesComponent } from './cases/cases.component';
 import { CelularesComponent } from './celulares/celulares.component';
@@ -15,9 +18,11 @@ import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component'
 import { ProductoHomeComponent } from './productoHome/productoHome.component';
 import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
 
+
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
+  { path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -27,6 +32,10 @@ const appRoutes: Routes = [
     LoginComponent,
     CarritoComponent,
     SingUpComponent,
+
+    MenuComponent,
+    FooterComponent
+
     CasesComponent,
     CelularesComponent,
     ComprasComponent,
@@ -34,6 +43,7 @@ const appRoutes: Routes = [
     ProductoHomeComponent,
     ResumenOrdenComponent,
     MenuComponent
+
   ],
   imports: [
     BrowserModule,

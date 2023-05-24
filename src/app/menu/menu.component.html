@@ -1,27 +1,22 @@
 <header>
     <nav id="main-navbar" class="p-4 text-bg-dark">
-
-        <!-- Container wrapper -->
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a th:href="@{/}" class="d-flex align-items-center mb-2 mb-lg-0 text-warning text-decoration-none">
                     <b><i class="bi bi-android"></i></b>
                     &nbsp;
-                    <span class="text-warning"> <b>   A&C Accesorios   </b></span>
+                    <span class="text-warning"> <b> A&C Accesorios </b></span>
                 </a>
-                &nbsp; &nbsp;&nbsp;&nbsp;
-                &nbsp;
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                </ul>
+                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></ul>
 
                 <div class="text-end">
-                    <a class="btn btn-outline-light me-2" th:href="@{/usuario/login}">Login</a>
+                    <a class="btn btn-outline-light me-2" routerLink="/login">Login</a>
                     <a class="btn btn-warning" th:href="@{/getCart}"><i class="bi bi-cart2"></i></a>
                 </div>
             </div>
-
         </div>
-        <!-- Container wrapper -->
     </nav>
 </header>
