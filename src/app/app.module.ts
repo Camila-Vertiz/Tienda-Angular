@@ -17,6 +17,8 @@ import { ComprasComponent } from './compras/compras.component';
 import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
 import { ProductoHomeComponent } from './productoHome/productoHome.component';
 import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
@@ -47,6 +49,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [],
