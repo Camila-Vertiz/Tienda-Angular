@@ -1,0 +1,72 @@
+<html lang="es">
+
+<body>
+
+    <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
+    <div th:include="usuario/menuUser.html::header-user" th:unless="${sesion==null}">  </div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            A&C ACCESORIOS <small>/ Carrito</small>
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+            <li class="breadcrumb-item active">Carrito</li>
+        </ol>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="dorden:${cart}">
+                                    <td th:text="${dorden.nombre}"></td>
+                                    <td th:text="${dorden.precio}"></td>
+                                    <td th:text="${dorden.cantidad}"></td>
+                                    <td th:text="${dorden.total}"></td>
+                                    <td>
+                                        <form th:action="@{/delete/cart}" method="POST" id="delete">
+                                            <button onclick="return Eliminar()" class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i></button>
+                                            <input type="hidden" th:value="${dorden.producto.id}" name="id">
+                                        </form>                                            
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <h2 class="card-title">SUBTOTAL</h2>
+
+                        <ul class="list-group">
+                            <li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
+                            <a th:href="@{/order}" class="btn btn-warning">Ver Orden</a>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <br/><br/><br/>
+    <div th:include="usuario/menuUser.html::footer">  </div>
+
+</body>
+</html>
