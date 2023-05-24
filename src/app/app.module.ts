@@ -25,6 +25,14 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'carrito', component: CarritoComponent},
+  { path: 'sign-up', component: SingUpComponent},
+  { path: 'cases', component: CasesComponent},
+  { path: 'celulares', component: CelularesComponent},
+  { path: 'compras', component: ComprasComponent},
+  { path: 'detalle-compra', component: DetalleCompraComponent},
+  { path: 'producto', component: ProductoHomeComponent},
+  { path: 'resumen', component: ResumenOrdenComponent},
 ];
 
 @NgModule({
