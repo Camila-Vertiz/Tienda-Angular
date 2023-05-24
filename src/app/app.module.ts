@@ -7,6 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { SingUpComponent } from './singUp/singUp.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { CasesComponent } from './cases/cases.component';
+import { CelularesComponent } from './celulares/celulares.component';
+import { ComprasComponent } from './compras/compras.component';
+import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
+import { ProductoHomeComponent } from './productoHome/productoHome.component';
+import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,7 +25,14 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    CarritoComponent,
     SingUpComponent,
+    CasesComponent,
+    CelularesComponent,
+    ComprasComponent,
+    DetalleCompraComponent,
+    ProductoHomeComponent,
+    ResumenOrdenComponent,
     MenuComponent
   ],
   imports: [
