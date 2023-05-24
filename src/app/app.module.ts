@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     SingUpComponent,
 
     MenuComponent,
-    FooterComponent
+    FooterComponent,
 
     CasesComponent,
     CelularesComponent,
