@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
+import { LoginComponent } from './login/login.component';
+import { SingUpComponent } from './singUp/singUp.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,6 +17,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
+    LoginComponent,
+    SingUpComponent,
     MenuComponent
   ],
   imports: [
