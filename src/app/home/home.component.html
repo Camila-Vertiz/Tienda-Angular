@@ -1,48 +1,40 @@
-<!--Main Navigation-->
 <app-menu></app-menu>
-<!--Main Navigation-->
+
 <main style="margin-top: 20px;">
-
-
   <div class="container">
-    <div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="../../assets/celulares/A03.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/celulares/A13.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
           <img src="../../assets/celulares/A22_5G.png" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item">
+          <img src="../../assets/celulares/A33_5G.png" class="d-block w-100" alt="...">
+        </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <br />
-    <br />
+    <br><br>
     <h1 class="text-center">¿Qué estás buscando?</h1>
-    <br />
+
+    <br>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
       <div class="col">
         <div class="card">
-          <br />
-          <br />
+          <br>
+          <br>
           <img src="../../assets/celulares/xr.png" class="card-img-top box" alt="iphone xr">
-          <br />
+          <br>
           <div class="card-body">
             <a class="btn btn-warning stretched-link text-center fs-5" th:href="@{/celulares}">Celulares</a>
           </div>
@@ -59,13 +51,10 @@
       </div>
       <div class="col">
         <div class="card">
-          <br />
-          <br />
-          <br />
-          <br />
+          <br><br><br><br>
           <img src="../../assets/celulares/reparacion1.jpg" class="card-img-top box" alt="Reparacion Celular">
-          <br />
-          <br />
+          <br>
+          <br>
           <div class="card-body">
             <a class="btn btn-warning stretched-link text-center fs-5"
               href="https://api.whatsapp.com/send?phone=51963254253&text=Buenas%20tardes,%20quisiera%20ver%20su%20catálogo.">Servicio
@@ -76,10 +65,7 @@
     </div>
   </div>
 
-  <br />
-  <br />
-  <br />
-  <br />
+  <br><br><br><br>
 
   <div class="container text-center">
     <div class="row">
@@ -90,20 +76,20 @@
         <img src="../../assets/celulares/mail.jpg" class="card-img-top box" alt="mail">
       </div>
       <div class="col-sm-6">
-        <br />
-        <br />
+        <br>
+        <br>
         <h3><b>¿Quieres ser el primero de enterarte de nuestras ofertas?</b></h3>
-        <br />
+        <br>
         <p> Suscríbete con tu dirección de correo electrónico y disfruta de los mejores beneficios y descuentos. </p>
 
-        <br />
+        <br>
 
         <form th:action="@{/usuario/saveSuscripcion}" method="post" id="registrar">
           <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
           <div class="invalid-feedback">
             Por favor ingrese una dirección de correo válida para la actualización del envío.
           </div>
-          <br />
+          <br>
           <button onclick="return Registrar()" type="button" class="btn btn-warning">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill"
               viewBox="0 0 16 16">
@@ -120,5 +106,7 @@
       </div>
     </div>
   </div>
-  <br /><br /><br />
+  <br><br><br>
 </main>
+
+<app-footer></app-footer>
