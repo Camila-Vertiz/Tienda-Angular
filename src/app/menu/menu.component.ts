@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -8,11 +9,13 @@ import { ServiciosapiService } from '../servicio-api.component';
 })
 export class MenuComponent {
   isLogged = false;
+  tipo="";
 
   constructor(
+    private router: Router,
     private apiService: ServiciosapiService
   ) {
-
+    this.buscarUser();
   }
 
   ngAfterViewInit() {
@@ -24,5 +27,26 @@ export class MenuComponent {
     console.log(this.isLogged);
   }
 
+  buscarUser() {
+    const id_user = localStorage.getItem('id_user');
+    this.apiService.buscarUsuarioPorId(id_user)
+      .then(data => {
+        //console.log(JSON.stringify(data));
+        const jsonRespuesta = JSON.stringify(data);
+        const Respuesta = JSON.parse(jsonRespuesta);
+        var tipo = Respuesta[0].tipo;
+        this.tipo = tipo;
+        console.log(tipo);
+      })
+      .catch(error => {
+        //console.log(error);
+      });
+  }
 
+  logout() {
+    localStorage.clear();
+    this.apiService.setUserLoggedIn(false);
+    location.reload();
+    // //console.log(localStorage.getItem('id_user'));
+  }
 }

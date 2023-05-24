@@ -27,6 +27,18 @@ export class ServiciosapiService {
         });
     }
 
+    buscarUsuarioPorId(id: any) {
+        return new Promise((resolve, reject) => {
+          this.http.get(this.url + '/usuario/listar/' + id)
+            .subscribe(response => {
+              resolve(response);
+              //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+            }, (error) => {
+              reject("Error api buscarUsuarioPorId:" + JSON.stringify(error));
+            });
+        });
+      }
+
     setUserLoggedIn(userLoggedIn: boolean) {
         this.userLoggedIn.next(userLoggedIn);
     }
