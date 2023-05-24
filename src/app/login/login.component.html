@@ -1,32 +1,30 @@
-
 <app-menu></app-menu>
 
-
-<body style ="background-color:#212529;" class="align-items-center">
-
-    <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
-
-    <br/> <br/>
-    <div class="container">
-        <div class="row">
+<body style="background-color:#212529;" class="align-items-center">
+    <div class="container" style="margin-bottom: 20px;">
+    <br><br><br>
+    <div class="row">
             <div class="col-sm-6 text-white">
-                <br/>
+                <br>
                 <div class="px-5 ms-xl-4">
                     <span class="h1 fw-bold mb-0 text-white">Login</span>
                 </div>
 
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-                    <form style="width: 23rem;" th:action="@{/usuario/acceder}" method="post" class="needs-validation" novalidate="">
+                    <form style="width: 23rem;" th:action="@{/usuario/acceder}" method="post" class="needs-validation"
+                        novalidate="">
 
                         <div class="form-outline mb-4">
-                            <input type="email" id="email" name="email"  class="form-control form-control-lg" placeholder="Correo Electrónico" required="">
+                            <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                placeholder="Correo Electrónico" required="">
                         </div>
                         <div class="invalid-feedback">
                             Por favor ingrese una dirección de correo válida para la actualización del envío.
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Contraseña" required="">
+                            <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                placeholder="Contraseña" required="">
                         </div>
 
                         <div class=" mb-4">
@@ -34,7 +32,8 @@
                         </div>
 
                         <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-                        <p>Don't have an account? <a th:href="@{/usuario/sign-up}" class="link-warning">Register here</a></p>
+                        <p>Don't have an account? <a th:href="@{/usuario/sign-up}" class="link-warning">Register
+                                here</a></p>
 
                     </form>
 
@@ -45,9 +44,8 @@
                 <img src="../../assets/celulares/Login.png" class="card-img-top box" alt="sign in">
             </div>
         </div>
-        <br/><br/><br/>
-        <hr class="text-white">
+        <br><br><br>
     </div>
-
-    <div th:include="usuario/menuUser.html::footer">  </div>
 </body>
+
+<app-footer></app-footer>
