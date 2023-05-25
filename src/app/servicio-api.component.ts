@@ -29,15 +29,26 @@ export class ServiciosapiService {
 
     buscarUsuarioPorId(id: any) {
         return new Promise((resolve, reject) => {
-          this.http.get(this.url + '/usuario/listar/' + id)
-            .subscribe(response => {
-              resolve(response);
-              //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
-            }, (error) => {
-              reject("Error api buscarUsuarioPorId:" + JSON.stringify(error));
-            });
+            this.http.get(this.url + '/usuario/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarUsuarioPorId:" + JSON.stringify(error));
+                });
         });
-      }
+    }
+
+    verificarExiste(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/usuario/existe', data, this.options)
+                .subscribe(Response => {
+                    resolve(Response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
 
     setUserLoggedIn(userLoggedIn: boolean) {
         this.userLoggedIn.next(userLoggedIn);

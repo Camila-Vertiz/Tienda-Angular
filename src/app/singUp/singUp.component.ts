@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 export class SingUpComponent {
   myForm: FormGroup;
   valido = false;
+  existe = false;
 
   constructor(
     public router: Router,
@@ -57,14 +58,11 @@ export class SingUpComponent {
       isPasswordValid = true;
     }
 
-    console.log("isPasswordValid: " + isPasswordValid);
     let iguales = false;
 
     if (this.myForm.value.password == this.myForm.value.password2) {
       iguales = true;
     }
-    console.log("iguales: " + iguales);
-
 
     if (isPasswordValid && iguales) {
       this.valido = true;
@@ -81,10 +79,41 @@ export class SingUpComponent {
     this.passwordStrengthValidator(pass);
     console.log("this.valido: " + this.valido);
     if (this.valido) {
-
+      this.yaExiste();
+      // this.alertaSuccess();
     } else {
       this.alertaError();
     }
+  }
+
+  yaExiste() {
+    const user = { email: this.myForm.value.email };
+    console.log(user);
+    this.apiService.verificarExiste(user)
+      .then(data => {
+        //console.log(JSON.stringify(data));
+        const jsonRespuesta = JSON.stringify(data);
+        console.log("jsonRespuesta: " + jsonRespuesta);
+        const Respuesta = JSON.parse(jsonRespuesta);
+        var id_user = Respuesta[0].idusuario;
+        var indice = Respuesta[0].ind_usuario;
+        console.log("idusuario: " + id_user);
+        console.log("indice: " + indice);
+
+        if (indice == 0) {
+          console.log('user no existe');
+          this.existe = false;
+          // this.router.navigate(['/home']);
+          // localStorage.setItem('id_user', id_user);
+        } else {
+          console.log('user existe');
+          this.existe = true;
+          this.alertaExiste();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   alertaError() {
@@ -107,5 +136,13 @@ export class SingUpComponent {
         this.router.navigate(['/home']);
       }
     });
+  }
+
+  alertaExiste() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario ya existe',
+      text: 'Usuario ya existe en la base de datos. Inicia sesión',
+    })
   }
 }
