@@ -13,6 +13,19 @@ export class SingUpComponent {
   myForm: FormGroup;
   valido = false;
   existe = false;
+  private Usuario = {
+    "nombre": "",
+    "username": "",
+    "email": "",
+    "password": "",
+    "telefono": "",
+    "direccion": "",
+    "departamento": "",
+    "provincia": "",
+    "distrito": "",
+    "zip": "",
+    "tipo": "USER"
+  };
 
   constructor(
     public router: Router,
@@ -95,16 +108,13 @@ export class SingUpComponent {
         const jsonRespuesta = JSON.stringify(data);
         console.log("jsonRespuesta: " + jsonRespuesta);
         const Respuesta = JSON.parse(jsonRespuesta);
-        var id_user = Respuesta[0].idusuario;
         var indice = Respuesta[0].ind_usuario;
-        console.log("idusuario: " + id_user);
         console.log("indice: " + indice);
 
         if (indice == 0) {
           console.log('user no existe');
           this.existe = false;
-          // this.router.navigate(['/home']);
-          // localStorage.setItem('id_user', id_user);
+          this.guardar();
         } else {
           console.log('user existe');
           this.existe = true;
@@ -113,6 +123,30 @@ export class SingUpComponent {
       })
       .catch(error => {
         console.log(error);
+      });
+  }
+
+  guardar() {
+    this.Usuario.nombre = this.myForm.value.nombre;
+    this.Usuario.username = this.myForm.value.username;
+    this.Usuario.email = this.myForm.value.email;
+    this.Usuario.password = this.myForm.value.password;
+    this.Usuario.telefono = this.myForm.value.telefono;
+    this.Usuario.direccion = this.myForm.value.direccion;
+    this.Usuario.departamento = this.myForm.value.departamento;
+    this.Usuario.provincia = this.myForm.value.provincia;
+    this.Usuario.distrito = this.myForm.value.distrito;
+    this.Usuario.zip = this.myForm.value.zip;
+    this.insertarBD();
+  }
+
+  insertarBD() {
+    this.apiService.insertarBD(this.Usuario)
+      .then(data => {
+        this.alertaSuccess();
+        this.router.navigate(['/home']);
+      }).catch(async er => {
+        console.log("error insertarBD:" + er);
       });
   }
 

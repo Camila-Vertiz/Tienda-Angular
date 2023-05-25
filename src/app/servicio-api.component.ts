@@ -50,6 +50,18 @@ export class ServiciosapiService {
         });
     }
 
+    insertarBD(data:any) {
+        return new Promise((resolve, reject) => {
+          this.http.post(this.url + '/usuario/insertar', data, this.options)
+            .subscribe(response => {
+              resolve(response);
+              //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+            }, (error) => {
+              reject("error API insertarBD: " + JSON.stringify(error));
+            });
+        });
+      }
+
     setUserLoggedIn(userLoggedIn: boolean) {
         this.userLoggedIn.next(userLoggedIn);
     }

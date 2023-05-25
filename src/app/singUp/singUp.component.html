@@ -70,20 +70,16 @@
 
                         <div class="col-12">
                             <label for="username" class="form-label text-white">Telefono</label>
-                            <input type="text" class="form-control" formControlName="telefono"
+                            <input type="text" class="form-control" formControlName="telefono" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').substring(0, 9);"
                                 required>
-                            <div class="invalid-feedback">
-                                Teléfono requerido.
-                            </div>
+                           
                         </div>
 
                         <div class="col-12">
                             <label for="direccion" class="form-label text-white">Dirección</label>
                             <input type="text" class="form-control" formControlName="direccion"
                                 placeholder="Av. Independencia #123" required>
-                            <div class="invalid-feedback">
-                                Por favor ingrese su dirección de envio.
-                            </div>
+                           
                         </div>
 
                         <div class="col-md-6">
@@ -116,35 +112,25 @@
                                 <option>Tumbes</option>
                                 <option>Ucayali</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Por favor ingrese un departamento válido.
-                            </div>
+                            
                         </div>
 
                         <div class="col-md-6">
                             <label for="city" class="form-label text-white">Provincia</label>
                             <input type="text" class="form-control" formControlName="provincia"
                                 required>
-                            <div class="invalid-feedback">
-                                Provincia requerida.
-                            </div>
+                            
                         </div>
 
                         <div class="col-md-6">
                             <label for="city" class="form-label text-white">Distrito</label>
                             <input type="text" class="form-control" formControlName="distrito"
                                 required>
-                            <div class="invalid-feedback">
-                                Distrito requerido.
-                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <label for="zip" class="form-label text-white">Zip</label>
                             <input type="text" class="form-control" id="zip" name="zip" formControlName="zip" required>
-                            <div class="invalid-feedback">
-                                Código Zip requerido.
-                            </div>
                         </div>
                     </div>
 
