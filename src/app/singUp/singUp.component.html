@@ -1,10 +1,7 @@
-
 <app-menu></app-menu>
 <html lang="es">
 
-<body style ="background-color:#212529;" class="align-items-center">
-
-    <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
+<body style="background-color:#212529;" class="align-items-center">
 
     <!-- Page Content -->
     <div class="container">
@@ -13,88 +10,81 @@
             <div class="col-3"></div>
 
             <div class="col-6">
-                <br/> <br/>
+                <br> <br>
                 <h1 class="mb-3 text-warning text-center">Sign Up</h1>
-                <br/>
-                <form th:action="@{/usuario/save}" method="post" class="needs-validation" novalidate="">
+                <br>
+                <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                     <div class="row g-3">
                         <div class="col-12">
                             <label for="nombre" class="form-label text-white">Nombres</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Se requiere un nombre válido.
-                            </div>
+                            <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre" required>
                         </div>
 
                         <div class="col-12">
                             <label for="username" class="form-label text-white">Username</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                                <div class="invalid-feedback">
-                                    Se requiere un username válido.
-                                </div>
+                                <input type="text" class="form-control" formControlName="username"
+                                    placeholder="Username" required>
                             </div>
                         </div>
 
                         <div class="col-12">
                             <label for="email" class="form-label text-white">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
-                            <div class="invalid-feedback">
-                                Por favor ingrese una dirección de correo válida para la actualización del envío.
-                            </div>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="you@example.com" formControlName="email" required>
                         </div>
 
                         <div class="col-12">
                             <div class="col-auto">
                                 <label for="inputPassword6" class="col-form-label text-white">Contraseña</label>
                             </div>
-                            
+
                             <div class="col-auto">
-                                <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpInline">
+                                <input type="password" id="password" name="password" class="form-control" formControlName="password"
+                                    aria-describedby="passwordHelpInline">
                             </div>
                             <div class="col-auto">
                                 <span id="passwordHelpInline" class="form-text" style="color:#BABABA">
                                     Debe tener 8-20 caracteres de largo.
                                 </span>
                             </div>
-                            
-                            
+
                             <div class="col-auto">
-                                <label for="inputPassword6" class="col-form-label text-white">Escriba de nuevo la contraseña</label>
+                                <label for="inputPassword6" class="col-form-label text-white">Escriba de nuevo la
+                                    contraseña</label>
                             </div>
-                            
+
                             <div class="col-auto">
-                                <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpInline">
+                                <input type="password"  class="form-control" formControlName="password2"
+                                    aria-describedby="passwordHelpInline">
                             </div>
                             <div class="col-auto">
-                                
+
                             </div>
-                            
-                            
+
+
                         </div>
-                        
-                        
+
+
 
                         <div class="col-12">
                             <label for="username" class="form-label text-white">Telefono</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Teléfono requerido.
-                            </div>
+                            <input type="text" class="form-control" formControlName="telefono" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').substring(0, 9);"
+                                required>
+                           
                         </div>
 
                         <div class="col-12">
                             <label for="direccion" class="form-label text-white">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Av. Independencia #123" required>
-                            <div class="invalid-feedback">
-                                Por favor ingrese su dirección de envio.
-                            </div>
+                            <input type="text" class="form-control" formControlName="direccion"
+                                placeholder="Av. Independencia #123" required>
+                           
                         </div>
 
                         <div class="col-md-6">
                             <label for="state" class="form-label text-white">Departamento</label>
-                            <select class="form-select" id="region" name="departamento" required>
+                            <select class="form-select" id="region" name="departamento" formControlName="departamento" required>
                                 <option value="">Selecciona...</option>
                                 <option>Amazonas</option>
                                 <option>Ancash</option>
@@ -122,33 +112,25 @@
                                 <option>Tumbes</option>
                                 <option>Ucayali</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Por favor ingrese un departamento válido.
-                            </div>
+                            
                         </div>
 
                         <div class="col-md-6">
                             <label for="city" class="form-label text-white">Provincia</label>
-                            <input type="text" class="form-control" id="provincia" name="provincia" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Provincia requerida.
-                            </div>
+                            <input type="text" class="form-control" formControlName="provincia"
+                                required>
+                            
                         </div>
 
                         <div class="col-md-6">
                             <label for="city" class="form-label text-white">Distrito</label>
-                            <input type="text" class="form-control" id="distrito" name="distrito" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Distrito requerido.
-                            </div>
+                            <input type="text" class="form-control" formControlName="distrito"
+                                required>
                         </div>
 
                         <div class="col-md-6">
                             <label for="zip" class="form-label text-white">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="" required="">
-                            <div class="invalid-feedback">
-                                Código Zip requerido.
-                            </div>
+                            <input type="text" class="form-control" id="zip" name="zip" formControlName="zip" required>
                         </div>
                     </div>
 
@@ -157,7 +139,7 @@
                     <div class="row">
                         <div class="col-4"></div>
                         <div class="col-4">
-                            <button class="w-100 btn btn-warning" type="submit"><b>Sign Up</b></button>
+                            <button class="w-100 btn btn-warning" type="submit" (click)="signup()" [disabled]="!myForm.valid"><b>Sign Up</b></button>
                         </div>
                         <div class="col-4"></div>
                     </div>
@@ -166,28 +148,11 @@
 
             <div class="col-3"></div>
         </div>
-        <br/><br/><br/>
-        <hr class="text-white">
+        <br><br><br>
     </div>
 
-    <div th:include="usuario/menuUser.html::footer">  </div>
 </body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<app-footer></app-footer>
 
 </html>

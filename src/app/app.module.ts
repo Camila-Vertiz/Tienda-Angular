@@ -17,12 +17,22 @@ import { ComprasComponent } from './compras/compras.component';
 import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
 import { ProductoHomeComponent } from './productoHome/productoHome.component';
 import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'carrito', component: CarritoComponent},
+  { path: 'sign-up', component: SingUpComponent},
+  { path: 'cases', component: CasesComponent},
+  { path: 'celulares', component: CelularesComponent},
+  { path: 'compras', component: ComprasComponent},
+  { path: 'detalle-compra', component: DetalleCompraComponent},
+  { path: 'producto', component: ProductoHomeComponent},
+  { path: 'resumen', component: ResumenOrdenComponent},
 ];
 
 @NgModule({
@@ -47,6 +57,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [],
