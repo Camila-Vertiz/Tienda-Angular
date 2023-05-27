@@ -5,11 +5,11 @@ import { ServiciosapiService } from '../servicio-api.component';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-singUp',
-  templateUrl: './singUp.component.html',
-  styleUrls: ['./singUp.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class SingUpComponent {
+export class SignUpComponent {
   myForm: FormGroup;
   valido = false;
   existe = false;
@@ -26,6 +26,8 @@ export class SingUpComponent {
     "zip": "",
     "tipo": "USER"
   };
+
+  texto = "";
 
   constructor(
     public router: Router,
@@ -45,6 +47,34 @@ export class SingUpComponent {
       distrito: ['', [Validators.required]],
       zip: ['', [Validators.required]]
     });
+  }
+
+  get password() {
+    return this.myForm.get('password');
+  }
+
+  onPasswordStrengthChanged(strength: any) {
+    console.log('onPasswordStrengthChanged', strength);
+    if (strength == 0 || strength == 1)
+      this.texto = "Débil"
+    if (strength == 2 || strength == 3)
+      this.texto = "Moderada"
+    if (strength == 4)
+      this.texto = "Fuerte"
+  }
+  onSubmit() {
+    // if (this.userForm.valid) {
+    //   console.log('====================================');
+    //   console.log('userForm', this.userForm);
+    //   console.log('====================================');
+    // } else {
+    //   console.log('====================================');
+    //   console.log('Invalid Form');
+    //   console.log('====================================');
+    //   Object.keys(this.userForm.controls).forEach((key) => {
+    //     // this.userForm.get(key).markAsDirty();
+    //   });
+    // }
   }
 
   passwordStrengthValidator(control: any) {
