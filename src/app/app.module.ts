@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { CustomPsmServiceService } from './sign-up/custom-psm-service.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
-    PasswordStrengthMeterModule.forRoot()
+    PasswordStrengthMeterModule.forRoot({ serviceClass: CustomPsmServiceService }),
+    // PasswordStrengthMeterModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

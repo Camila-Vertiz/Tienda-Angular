@@ -47,11 +47,12 @@
                                   }" placeholder="Password" aria-describedby="passwordHelpBlock"
                                     formControlName="password" autocomplete="current-password" />
                                 <span id="passwordHelpInline" class="form-text" style="color:#BABABA">
-                                    Debe tener 8-20 caracteres de largo.
+                                    Debe tener 8-20 caracteres de largo, contener letras, números y por lo menos una mayúsucla y un caracter especial.
                                 </span>
                                 <password-strength-meter [password]="password?.value" [numberOfProgressBarItems]="5"
                                     [enableFeedback]="true"
                                     (strengthChange)="onPasswordStrengthChanged($event)"></password-strength-meter>
+                                <label class="form-text" style="color:#BABABA">Su contraseña es: {{texto}}</label>
                             </div>
 
                             <div class="col-auto">

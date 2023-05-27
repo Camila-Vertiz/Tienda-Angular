@@ -27,6 +27,8 @@ export class SignUpComponent {
     "tipo": "USER"
   };
 
+  texto = "";
+
   constructor(
     public router: Router,
     public formBuilder: FormBuilder,
@@ -51,10 +53,14 @@ export class SignUpComponent {
     return this.myForm.get('password');
   }
 
-  onPasswordStrengthChanged(strength:any) {
-    console.log('====================================');
+  onPasswordStrengthChanged(strength: any) {
     console.log('onPasswordStrengthChanged', strength);
-    console.log('====================================');
+    if (strength == 0 || strength == 1)
+      this.texto = "Débil"
+    if (strength == 2 || strength == 3)
+      this.texto = "Moderada"
+    if (strength == 4)
+      this.texto = "Fuerte"
   }
   onSubmit() {
     // if (this.userForm.valid) {
