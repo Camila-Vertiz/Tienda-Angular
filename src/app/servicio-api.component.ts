@@ -53,17 +53,17 @@ export class ServiciosapiService {
         });
     }
 
-    insertarBD(data:any) {
+    insertarClienteBD(data: any) {
         return new Promise((resolve, reject) => {
-          this.http.post(this.url + '/usuario/insertar', data, this.options)
-            .subscribe(response => {
-              resolve(response);
-              //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
-            }, (error) => {
-              reject("error API insertarBD: " + JSON.stringify(error));
-            });
+            this.http.post(this.url + '/usuario/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarClienteBD: " + JSON.stringify(error));
+                });
         });
-      }
+    }
 
     setUserLoggedIn(userLoggedIn: boolean) {
         this.userLoggedIn.next(userLoggedIn);
@@ -71,5 +71,21 @@ export class ServiciosapiService {
 
     getUserLoggedIn(): Observable<boolean> {
         return this.userLoggedIn.asObservable();
+    }
+
+    listarCategoria() {
+        return this.http.get<any[]>(this.url + '/categoria/listar');
+    }
+    
+    insertarCategoria(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/categoria/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarCategoria: " + JSON.stringify(error));
+                });
+        });
     }
 }

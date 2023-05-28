@@ -171,7 +171,7 @@ export class SignUpComponent {
   }
 
   insertarBD() {
-    this.apiService.insertarBD(this.Usuario)
+    this.apiService.insertarClienteBD(this.Usuario)
       .then(data => {
         this.alertaSuccess();
         this.router.navigate(['/home']);
