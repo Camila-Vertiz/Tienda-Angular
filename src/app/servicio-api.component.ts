@@ -76,7 +76,7 @@ export class ServiciosapiService {
     listarCategoria() {
         return this.http.get<any[]>(this.url + '/categoria/listar');
     }
-    
+
     insertarCategoria(data: any) {
         return new Promise((resolve, reject) => {
             this.http.post(this.url + '/categoria/insertar', data, this.options)
@@ -85,6 +85,18 @@ export class ServiciosapiService {
                     //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
                 }, (error) => {
                     reject("error API insertarCategoria: " + JSON.stringify(error));
+                });
+        });
+    }
+
+    eliminarCategoria(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.delete(this.url + '/categoria/eliminar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api eliminarCategoria:" + JSON.stringify(error));
                 });
         });
     }

@@ -21,8 +21,8 @@ export class CategoriaComponent {
     "nombre": ""
   }
 
-  title="";
-  msg="";
+  title = "";
+  msg = "";
 
   constructor(
     public formBuilder: FormBuilder,
@@ -50,8 +50,8 @@ export class CategoriaComponent {
     console.log(nombre);
     this.apiService.insertarCategoria(JSON.stringify(nombre))
       .then(data => {
-        this.title="Registro exitoso";
-        this.msg="Categoría creada con éxito";
+        this.title = "Registro exitoso";
+        this.msg = "Categoría creada con éxito";
         this.alertaSuccess();
       }).catch(async er => {
         console.log("error insertarCategoria:" + er);
@@ -74,7 +74,7 @@ export class CategoriaComponent {
     Swal.fire({
       icon: 'success',
       title: this.title,
-      text:  this.msg,
+      text: this.msg,
       confirmButtonText: 'OK',
     }).then(() => {
       this.myForm.controls['nombre'].setValue('');
@@ -94,11 +94,48 @@ export class CategoriaComponent {
     this.Categoria.nombre = this.myForm.value.nombre;
     this.apiService.insertarCategoria(this.Categoria)
       .then(data => {
-        this.title="Actualización exitosa";
-        this.msg="Categoría acualizada con éxito";
+        this.title = "Actualización exitosa";
+        this.msg = "Categoría acualizada con éxito";
         this.alertaSuccess();
       }).catch(async er => {
         console.log("error insertarCategoria:" + er);
       });
+  }
+
+  alertaBefDelete(id_categoria: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Esta acción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.eliminarCategoria(id_categoria)
+          .then(data => {
+            this.alertaPostDelete();
+          }).catch(async er => {
+            console.log("error insertarCategoria:" + er);
+          });
+      }
+    });
+  }
+
+  alertaPostDelete() {
+    Swal.fire({
+      title: 'Eliminado',
+      text: 'La categoría se ha eliminado con éxito',
+      icon: 'success',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.reload();
+      }
+    });
   }
 }

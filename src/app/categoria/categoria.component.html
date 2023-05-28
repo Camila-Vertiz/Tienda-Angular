@@ -52,8 +52,7 @@
                                 class="bi bi-pencil-square"></i></button>
                     </td>
                     <td>
-                        <a onclick="return Eliminar(this)" th:href="@{/categoria/eliminar(id=${categoria.id})}"
-                            class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        <button class="btn btn-danger" (click)="alertaBefDelete(categoria.id_categoria)"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             </tbody>
