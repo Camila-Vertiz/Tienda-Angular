@@ -16,7 +16,14 @@ export class CategoriaComponent {
   categorias: any[] = [];
   terminoBusqueda = "";
   nombreCategoria: string = '';
-  
+  public Categoria = {
+    "id_categoria": 0,
+    "nombre": ""
+  }
+
+  title="";
+  msg="";
+
   constructor(
     public formBuilder: FormBuilder,
     private apiService: ServiciosapiService) {
@@ -43,6 +50,8 @@ export class CategoriaComponent {
     console.log(nombre);
     this.apiService.insertarCategoria(JSON.stringify(nombre))
       .then(data => {
+        this.title="Registro exitoso";
+        this.msg="Categoría creada con éxito";
         this.alertaSuccess();
       }).catch(async er => {
         console.log("error insertarCategoria:" + er);
@@ -64,17 +73,32 @@ export class CategoriaComponent {
   alertaSuccess() {
     Swal.fire({
       icon: 'success',
-      title: 'Registro exitoso',
-      text: 'Categoría creada con éxito',
+      title: this.title,
+      text:  this.msg,
       confirmButtonText: 'OK',
     }).then(() => {
       this.myForm.controls['nombre'].setValue('');
+      location.reload();
     });
   }
 
-  abrirModalEditar(nombreCategoria: string) {
-    this.nombreCategoria = nombreCategoria;
+  abrirModalEditar(id_categoria: number, nombre: string) {
+    this.Categoria.id_categoria = id_categoria;
+    this.Categoria.nombre = nombre;
+    console.log(this.Categoria)
     this.modalEditar.nativeElement.classList.add('show');
     document.body.classList.add('modal-open');
+  }
+
+  actualizar() {
+    this.Categoria.nombre = this.myForm.value.nombre;
+    this.apiService.insertarCategoria(this.Categoria)
+      .then(data => {
+        this.title="Actualización exitosa";
+        this.msg="Categoría acualizada con éxito";
+        this.alertaSuccess();
+      }).catch(async er => {
+        console.log("error insertarCategoria:" + er);
+      });
   }
 }

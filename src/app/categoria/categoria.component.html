@@ -48,7 +48,7 @@
 
                     <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#modalEditar" (click)="abrirModalEditar(categoria.nombre)"><i
+                            data-bs-target="#modalEditar" (click)="abrirModalEditar(categoria.id_categoria, categoria.nombre)"><i
                                 class="bi bi-pencil-square"></i></button>
                     </td>
                     <td>
@@ -102,14 +102,14 @@
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
                             <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre"
-                                placeholder="{{nombreCategoria}}" value="{{nombreCategoria}}">
+                                value="{{this.Categoria.nombre}}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
-                        (click)="registrar()">Registrar</button>
+                        (click)="actualizar()">Actualizar</button>
                 </div>
             </div>
         </div>
