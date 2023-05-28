@@ -10,7 +10,7 @@
         </h1>
 
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/home" style="color:black;font-weight: bold;">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/productos" style="color:black;font-weight: bold;">Home</a></li>
             <li class="breadcrumb-item active">Ver Usuarios</li>
         </ol>
         <table class="table table-striped">
@@ -28,11 +28,6 @@
                     <td>{{ cliente.direccion }}, {{cliente.departamento}}, {{cliente.provincia}}, {{cliente.distrito}}
                     </td>
                 </tr>
-                <!-- <tr th:each="usuario: ${usuarios}">
-                    <td th:text="${usuario.nombre}"></td>
-                    <td th:text="${usuario.email}"></td>
-                    <td th:text="${usuario.direccion}"></td>
-                </tr> -->
             </tbody>
         </table>
     </div>

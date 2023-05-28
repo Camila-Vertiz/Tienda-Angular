@@ -69,6 +69,7 @@ export class LoginComponent {
             this.tiempoRestante = 15;
             this.desactivarBoton = true;
             this.contador();
+            this.intentos = 3;
           } else {
             this.mensaje = 'Verifica tus credenciales. Te quedan ' + this.intentos + ' intentos restantes.';
           }
