@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent {
   isLogged = false;
-  tipo="";
+  tipo = "";
 
   constructor(
     private router: Router,
@@ -46,7 +46,10 @@ export class MenuComponent {
   logout() {
     localStorage.clear();
     this.apiService.setUserLoggedIn(false);
-    location.reload();
-    // //console.log(localStorage.getItem('id_user'));
+    if (this.router.url === '/home') {
+      location.reload();
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }
