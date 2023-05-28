@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 export class CategoriaComponent {
   myForm: FormGroup;
   categorias: any[] = [];
+  terminoBusqueda="";
 
   constructor(
     public formBuilder: FormBuilder,
@@ -42,6 +43,18 @@ export class CategoriaComponent {
       }).catch(async er => {
         console.log("error insertarCategoria:" + er);
       });
+  }
+
+  getCategoriasFiltradas(): any[] {
+    if (!this.terminoBusqueda) {
+      return this.categorias;
+    }
+    const termino = this.terminoBusqueda.toLowerCase();
+    return this.categorias.filter((categoria: any) => {
+      
+      const nombres = `${categoria.nombre}`.toLowerCase();
+      return nombres.includes(termino);
+    });
   }
 
   alertaSuccess() {

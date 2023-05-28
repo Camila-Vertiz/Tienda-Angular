@@ -22,12 +22,12 @@
                 <input type="hidden">
             </div>
             <div class="col-5">
-                <form class="d-flex" role="search" th:action="@{/categoria/buscarCategoria}" method="POST" id="busc">
-                    <input class="form-control me-2" name="dato" required="required" type="text" placeholder="Buscar"
-                        aria-label="Buscar">
+                <div class="d-flex">
+                    <input class="form-control me-2" type="search" style="width: 185px;" placeholder="Buscar por nombre"
+                        aria-label="Search" [(ngModel)]="terminoBusqueda">
                     <button class="btn btn-warning d-none d-md-inline-block " type="submit"><i
                             class="bi bi-search"></i></button>
-                </form>
+                    </div>
             </div>
         </div>
         <br />
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let categoria of categorias">
+                <tr *ngFor="let categoria of getCategoriasFiltradas()">
                     <td>{{categoria.id_categoria}}</td>
                     <td>{{categoria.nombre}}</td>
 
@@ -75,13 +75,15 @@
                     <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre" placeholder="Ingrese nombre">
+                            <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre"
+                                placeholder="Ingrese nombre">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid" (click)="registrar()">Registrar</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
+                        (click)="registrar()">Registrar</button>
                 </div>
             </div>
         </div>
