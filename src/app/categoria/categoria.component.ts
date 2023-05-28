@@ -25,6 +25,14 @@ export class CategoriaComponent {
     });
   }
 
+  asc(){
+    this.categorias.sort((a, b) => a.id_categoria - b.id_categoria);
+  }
+
+  desc(){
+    this.categorias.sort((a, b) => b.id_categoria - a.id_categoria);
+  }
+
   registrar() {
     const nombre=this.myForm.value.nombre;
     console.log(nombre);

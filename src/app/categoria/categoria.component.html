@@ -14,8 +14,8 @@
             <div class="col-3">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i></button>&nbsp;
-                <a th:href="@{/categoria/orden_asc}" class="btn btn-warning"><i class="bi bi-sort-up"></i></a>&nbsp;
-                <a th:href="@{/categoria/orden_desc}" class="btn btn-warning"><i class="bi bi-sort-down"></i></a>
+                <button class="btn btn-warning" (click)="asc()"><i class="bi bi-sort-up"></i></button>&nbsp;
+                <button class="btn btn-warning" (click)="desc()"><i class="bi bi-sort-down"></i></button>
 
             </div>
             <div class="col-4">
