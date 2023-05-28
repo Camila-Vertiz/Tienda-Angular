@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiciosapiService } from '../servicio-api.component';
 import Swal from 'sweetalert2'
@@ -9,10 +10,13 @@ import Swal from 'sweetalert2'
   styleUrls: ['./categoria.component.scss']
 })
 export class CategoriaComponent {
+  @ViewChild('modalEditar') modalEditar!: ElementRef;
+
   myForm: FormGroup;
   categorias: any[] = [];
-  terminoBusqueda="";
-
+  terminoBusqueda = "";
+  nombreCategoria: string = '';
+  
   constructor(
     public formBuilder: FormBuilder,
     private apiService: ServiciosapiService) {
@@ -26,16 +30,16 @@ export class CategoriaComponent {
     });
   }
 
-  asc(){
+  asc() {
     this.categorias.sort((a, b) => a.id_categoria - b.id_categoria);
   }
 
-  desc(){
+  desc() {
     this.categorias.sort((a, b) => b.id_categoria - a.id_categoria);
   }
 
   registrar() {
-    const nombre=this.myForm.value.nombre;
+    const nombre = this.myForm.value.nombre;
     console.log(nombre);
     this.apiService.insertarCategoria(JSON.stringify(nombre))
       .then(data => {
@@ -51,7 +55,7 @@ export class CategoriaComponent {
     }
     const termino = this.terminoBusqueda.toLowerCase();
     return this.categorias.filter((categoria: any) => {
-      
+
       const nombres = `${categoria.nombre}`.toLowerCase();
       return nombres.includes(termino);
     });
@@ -66,5 +70,11 @@ export class CategoriaComponent {
     }).then(() => {
       this.myForm.controls['nombre'].setValue('');
     });
+  }
+
+  abrirModalEditar(nombreCategoria: string) {
+    this.nombreCategoria = nombreCategoria;
+    this.modalEditar.nativeElement.classList.add('show');
+    document.body.classList.add('modal-open');
   }
 }

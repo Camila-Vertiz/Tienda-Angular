@@ -27,7 +27,7 @@
                         aria-label="Search" [(ngModel)]="terminoBusqueda">
                     <button class="btn btn-warning d-none d-md-inline-block " type="submit"><i
                             class="bi bi-search"></i></button>
-                    </div>
+                </div>
             </div>
         </div>
         <br />
@@ -48,8 +48,7 @@
 
                     <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#modalEditar"
-                            th:attr="data-bs-id=${categoria.id},data-bs-nom=${categoria.nombre}"><i
+                            data-bs-target="#modalEditar" (click)="abrirModalEditar(categoria.nombre)"><i
                                 class="bi bi-pencil-square"></i></button>
                     </td>
                     <td>
@@ -90,7 +89,8 @@
     </div>
 
     <!-- Model EDITAR/ACTUALIZAR -->
-    <!-- <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" #modalEditar id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,21 +98,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/categoria/actualizar}" method="POST" id="actualizar">
-                        <input type="hidden" name="id" id="id">
+                    <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="nombre" id="nomx" class="form-control"
-                                placeholder="Ingrese nombre">
+                            <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre"
+                                placeholder="{{nombreCategoria}}" value="{{nombreCategoria}}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="return Actualizar()" type="button" class="btn btn-warning">Actualizar</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
+                        (click)="registrar()">Registrar</button>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <app-footer></app-footer>
 </body>
