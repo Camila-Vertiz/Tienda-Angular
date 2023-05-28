@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CustomPsmServiceService } from './sign-up/custom-psm-service.service';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'detalle-compra', component: DetalleCompraComponent},
   { path: 'producto', component: ProductoHomeComponent},
   { path: 'resumen', component: ResumenOrdenComponent},
+  { path: 'usuarios', component: UsuariosComponent},
 ];
 
 @NgModule({
@@ -54,6 +56,7 @@ const appRoutes: Routes = [
     ProductoHomeComponent,
     ResumenOrdenComponent,
     MenuComponent,
+    UsuariosComponent,
 
   ],
   imports: [
