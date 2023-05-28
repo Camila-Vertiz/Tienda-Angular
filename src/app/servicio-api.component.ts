@@ -15,6 +15,9 @@ export class ServiciosapiService {
     private options: any = { headers: new HttpHeaders({ 'Content-Type': 'application/json', }) };
     constructor(private http: HttpClient) { }
 
+    listarClientes() {
+        return this.http.get<any[]>(this.url + '/listaClientes');
+    }
 
     login(data: any) {
         return new Promise((resolve, reject) => {
