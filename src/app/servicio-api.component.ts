@@ -100,4 +100,8 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    listarProductos() {
+        return this.http.get<any[]>(this.url + '/producto/listar');
+    }
 }

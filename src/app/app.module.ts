@@ -14,7 +14,6 @@ import { CasesComponent } from './cases/cases.component';
 import { CelularesComponent } from './celulares/celulares.component';
 import { ComprasComponent } from './compras/compras.component';
 import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
-import { ProductoHomeComponent } from './productoHome/productoHome.component';
 import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +22,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { CustomPsmServiceService } from './sign-up/custom-psm-service.service';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { ProductoComponent } from './producto/producto.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   { path: 'celulares', component: CelularesComponent},
   { path: 'compras', component: ComprasComponent},
   { path: 'detalle-compra', component: DetalleCompraComponent},
-  { path: 'producto', component: ProductoHomeComponent},
+  { path: 'producto', component: ProductoComponent},
   { path: 'resumen', component: ResumenOrdenComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'categoria', component: CategoriaComponent},
@@ -55,11 +55,11 @@ const appRoutes: Routes = [
     CelularesComponent,
     ComprasComponent,
     DetalleCompraComponent,
-    ProductoHomeComponent,
     ResumenOrdenComponent,
     MenuComponent,
     UsuariosComponent,
     CategoriaComponent,
+    ProductoComponent,
 
   ],
   imports: [
