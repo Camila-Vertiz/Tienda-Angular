@@ -90,6 +90,7 @@ export class ProductoComponent {
     this.apiService.listarProductos().subscribe(data => {
       this.productos = data;
     });
+    this.asc();
   }
 
   buscarUser() {

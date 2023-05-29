@@ -26,6 +26,7 @@ import { CustomPsmServiceService } from './sign-up/custom-psm-service.service';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ProductoComponent } from './producto/producto.component';
+import { MostrarProductosComponent } from './mostrar-productos/mostrar-productos.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
   { path: 'resumen', component: ResumenOrdenComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'categoria', component: CategoriaComponent},
+  { path: 'mostrar-productos', component: MostrarProductosComponent},
 ];
 
 @NgModule({
@@ -63,6 +65,7 @@ const appRoutes: Routes = [
     UsuariosComponent,
     CategoriaComponent,
     ProductoComponent,
+    MostrarProductosComponent,
 
   ],
   imports: [
