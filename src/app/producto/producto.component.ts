@@ -17,9 +17,13 @@ export class ProductoComponent {
   productos: any[] = [];
   terminoBusqueda = "";
   nombreProducto: string = '';
-  public Producto = {
-    "id_producto": 0,
-    "nombre": ""
+  public nuevoProducto = {
+    "nombre": "",
+    "categoria": "",
+    "descripcion": "",
+    "cantidad": 10,
+    "precio": 0.0,
+    "imagen": "",
   }
 
   title = "";
@@ -33,7 +37,12 @@ export class ProductoComponent {
     public formBuilder: FormBuilder,
     private apiService: ServiciosapiService) {
     this.myForm = this.formBuilder.group({
-      nombre: ['', [Validators.required]]
+      nombre: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      cantidad: ['', [Validators.required]],
+      precio: ['', [Validators.required]],
+      imagen: ['', [Validators.required]],
     });
     this.cargarCategorias();
   }
@@ -82,5 +91,16 @@ export class ProductoComponent {
     this.selectedOption = event.target.value;
     this.categoria = this.selectedOption;
      console.log('Selected option:', this.selectedOption);
+  }
+
+  registrar(){
+    this.nuevoProducto.nombre=this.myForm.value.nombre;
+    this.nuevoProducto.categoria=this.myForm.value.categoria;
+    this.nuevoProducto.descripcion=this.myForm.value.descripcion;
+    this.nuevoProducto.cantidad=this.myForm.value.cantidad;
+    this.nuevoProducto.precio=this.myForm.value.precio;
+    this.nuevoProducto.imagen=this.myForm.value.imagen;
+
+    console.log(this.nuevoProducto)
   }
 }
