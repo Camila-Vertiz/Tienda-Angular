@@ -17,7 +17,7 @@ import { CasesComponent } from './cases/cases.component';
 import { CelularesComponent } from './celulares/celulares.component';
 import { ComprasComponent } from './compras/compras.component';
 import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
-import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
+import { OrdenComponent } from './orden/orden.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
   { path: 'compras', component: ComprasComponent},
   { path: 'detalle-compra', component: DetalleCompraComponent},
   { path: 'producto', component: ProductoComponent},
-  { path: 'resumen', component: ResumenOrdenComponent},
+  { path: 'orden', component: OrdenComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'categoria', component: CategoriaComponent},
   { path: 'mostrar-productos', component: MostrarProductosComponent},
@@ -62,7 +62,7 @@ const appRoutes: Routes = [
     CelularesComponent,
     ComprasComponent,
     DetalleCompraComponent,
-    ResumenOrdenComponent,
+    OrdenComponent,
     MenuComponent,
     UsuariosComponent,
     CategoriaComponent,
