@@ -12,6 +12,9 @@ export class OrdenComponent {
   cliente: any;
   carrito: any[];
   total: any;
+  ordenes: any[];
+  numero = 0;
+  numeroConcatenado = "";
 
   constructor(
     private router: Router,
@@ -19,7 +22,38 @@ export class OrdenComponent {
   ) {
     this.buscarUser();
     this.buscarCarritoPorCliente();
+    this.listarOrden();
+  }
 
+  listarOrden() {
+    this.apiService.listarOrden().subscribe(data => {
+      this.ordenes = data;
+      console.log(this.ordenes);
+      this.maxNumero();
+    });
+  }
+  maxNumero() {
+    if (this.ordenes.length === 0) {
+      this.numero = 1;
+    } else {
+      this.numero = this.ordenes.reduce((max, orden) => {
+        return orden.numero > max ? orden.numero : max;
+      }, this.ordenes[0].numero);
+      this.numero++;
+    }
+
+    if (this.numero < 10) {
+      this.numeroConcatenado = "000000000" + (this.numero);
+    } else if (this.numero < 100) {
+      this.numeroConcatenado = "00000000" + (this.numero);
+    } else if (this.numero < 1000) {
+      this.numeroConcatenado = "0000000" + (this.numero);
+    } else if (this.numero < 10000) {
+      this.numeroConcatenado = "000000" + (this.numero);
+    }
+
+    console.log("El máximo número de orden es:", this.numero);
+    console.log("numeroConcatenado:", this.numeroConcatenado);
   }
 
   buscarUser() {
@@ -60,6 +94,15 @@ export class OrdenComponent {
 
   calcularTotal() {
     this.total = this.carrito.reduce((accumulator, element) => accumulator + element.total, 0);
+  }
+
+  insertarOrden() {
+    this.apiService.insertarOrden(this.carrito)
+      .then(data => {
+        // this.alertaSuccess();
+      }).catch(async er => {
+        console.log("error insertarCategoria:" + er);
+      });
   }
 
 }

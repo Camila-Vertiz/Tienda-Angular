@@ -175,4 +175,20 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    listarOrden() {
+        return this.http.get<any[]>(this.url + '/orden/listar');
+    }
+
+    insertarOrden(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/orden/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarOrden: " + JSON.stringify(error));
+                });
+        });
+    }
 }
