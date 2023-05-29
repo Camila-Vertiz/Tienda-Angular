@@ -140,4 +140,39 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    buscarCarritoPorCliente(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/carrito/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarCarritoPorCliente:" + JSON.stringify(error));
+                });
+        });
+    }
+
+    verificarProductoExiste(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/carrito/verificar/producto', data, this.options)
+                .subscribe(Response => {
+                    resolve(Response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    insertarCarrito(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/carrito/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarCarrito: " + JSON.stringify(error));
+                });
+        });
+    }
 }

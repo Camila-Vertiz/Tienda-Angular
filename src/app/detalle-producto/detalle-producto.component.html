@@ -16,16 +16,15 @@
         <div class="card mb-4">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 text-center">
                         <a> <img class="img-fluid rounded" src="{{producto.imagen}}" alt="">
                         </a>
                     </div>
                     <div class="col-lg-6 align-items-center">
-                        <form th:action="@{/cart}" method="POST">
-                            <br />
+                            <br>
                             <input type="hidden" name="id">
                             <h2 class="card-title text-center">{{producto.nombre}}</h2>
-                            <br />
+                            <br>
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <h5>Precio: S/. {{producto.precio}}</h5>
@@ -36,22 +35,19 @@
                                 <li class="list-group-item">
                                     <h5>
                                         Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
-                                            min="1" max="5" value="1">
+                                            min="1" max="5" value="1" [(ngModel)]="cantidad">
                                     </h5>
                                 </li>
                             </ul>
 
-                            <br />
-                            <button type="submit" class="btn btn-warning">Añadir al carrito </button>
+                            <br>
+                            <button type="submit" class="btn btn-warning" (click)="setCart()">Añadir al carrito </button>
 
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-    <br /><br /><br />
+    <br><br><br>
 </body>
 <app-footer></app-footer>
