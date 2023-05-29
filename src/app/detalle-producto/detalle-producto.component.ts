@@ -13,7 +13,7 @@ export class DetalleProductoComponent {
   idProducto: any;
   producto: any;
   cantidad = 1;
-  existe = false;
+  existe = true;
 
   public carrito = {
     "id_producto": 1,
@@ -22,6 +22,7 @@ export class DetalleProductoComponent {
     "nombre": "",
     "precio": 0.0,
     "total": 0.0,
+    "estado":1
   }
 
   constructor(
@@ -58,6 +59,7 @@ export class DetalleProductoComponent {
     this.verificarProductoExiste();
     if (this.existe) {
       console.log("producto duplicado");
+      this.alertaError();
     }
     else {
       const id = localStorage.getItem('id_user');
@@ -117,6 +119,14 @@ export class DetalleProductoComponent {
     }).then(() => {
     this.router.navigate(['/carrito']);
     });
+  }
+
+  alertaError() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Producto duplicado',
+      text: 'Ya se ha agregado este producto en su carrito. Realice la compra.',
+    })
   }
 
 }
