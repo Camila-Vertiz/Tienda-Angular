@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-orden',
@@ -15,6 +16,24 @@ export class OrdenComponent {
   ordenes: any[];
   numero = 0;
   numeroConcatenado = "";
+  idOrden: any;
+  insertado = false;
+
+  public orden = {
+    "id_usuario": 1,
+    "numero": "",
+    "fechaCreacion": new Date(),
+    "total": 0.0
+  }
+
+  public detalleOrden: {
+    id_producto: number;
+    id_orden: number;
+    nombre: string;
+    cantidad: number;
+    precio: number;
+    total: number;
+  }[] = [];
 
   constructor(
     private router: Router,
@@ -32,6 +51,7 @@ export class OrdenComponent {
       this.maxNumero();
     });
   }
+
   maxNumero() {
     if (this.ordenes.length === 0) {
       this.numero = 1;
@@ -52,8 +72,8 @@ export class OrdenComponent {
       this.numeroConcatenado = "000000" + (this.numero);
     }
 
-    console.log("El máximo número de orden es:", this.numero);
-    console.log("numeroConcatenado:", this.numeroConcatenado);
+    // console.log("El máximo número de orden es:", this.numero);
+    // console.log("numeroConcatenado:", this.numeroConcatenado);
   }
 
   buscarUser() {
@@ -87,7 +107,6 @@ export class OrdenComponent {
       });
   }
 
-
   asc() {
     this.carrito.sort((a, b) => a.id_carrito - b.id_carrito);
   }
@@ -96,13 +115,74 @@ export class OrdenComponent {
     this.total = this.carrito.reduce((accumulator, element) => accumulator + element.total, 0);
   }
 
+  async generar() {
+    const id_usuario = localStorage.getItem('id_user');
+    if (id_usuario)
+      this.orden.id_usuario = parseInt(id_usuario);
+    this.orden.numero = this.numeroConcatenado;
+    this.orden.total = this.total;
+
+    console.log(this.orden);
+
+    await this.insertarOrden();
+    console.log(this.insertado);
+    this.insertarDetalleOrden()
+
+  }
+
   insertarOrden() {
-    this.apiService.insertarOrden(this.carrito)
+    this.apiService.insertarOrden(this.orden)
       .then(data => {
-        // this.alertaSuccess();
+        this.ultimaOrden();
+        this.carritoDetalle();
       }).catch(async er => {
         console.log("error insertarCategoria:" + er);
       });
+  }
+
+  carritoDetalle() {
+    this.detalleOrden = this.carrito.map(item => {
+      return {
+        id_producto: item.id_producto,
+        id_orden: this.idOrden,
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        precio: item.precio,
+        total: item.total
+      };
+    });
+
+    console.log("Array de carritoDetalle:", this.detalleOrden);
+  }
+
+  ultimaOrden() {
+    this.listarOrden();
+    this.idOrden = this.ordenes.reduce((max, orden) => {
+      return orden.id_orden > max ? orden.id_orden : max;
+    }, this.ordenes[0].id_orden);
+    console.log(this.idOrden)
+  }
+
+  insertarDetalleOrden() {
+    this.apiService.insertarDetalleOrden(this.detalleOrden)
+      .then(data => {
+        this.alertaSuccess();
+      }).catch(async er => {
+        console.log("error insertarDetalleOrden:" + er);
+      });
+  }
+
+
+
+  alertaSuccess() {
+    Swal.fire({
+      icon: 'success',
+      title: "Registro exitoso",
+      text: "Orden creada con éxito",
+      confirmButtonText: 'OK',
+    }).then(() => {
+      // location.reload();
+    });
   }
 
 }
