@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-celulares',
@@ -11,6 +12,7 @@ export class CelularesComponent {
   terminoBusqueda = "";
 
   constructor(
+    private router: Router,
     private apiService: ServiciosapiService) { }
 
   ngOnInit() {
@@ -32,6 +34,12 @@ export class CelularesComponent {
   }
 
   detalleProducto(producto: any) {
-    console.log(producto)
+    let extras: NavigationExtras = {
+      queryParams: {
+        producto: producto
+      }
+    };
+    console.log(producto);
+    this.router.navigate(['/detalle-producto'], extras);
   }
 }

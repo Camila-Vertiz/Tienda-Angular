@@ -27,6 +27,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ProductoComponent } from './producto/producto.component';
 import { MostrarProductosComponent } from './mostrar-productos/mostrar-productos.component';
+import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'categoria', component: CategoriaComponent},
   { path: 'mostrar-productos', component: MostrarProductosComponent},
+  { path: 'detalle-producto', component: DetalleProductoComponent},
 ];
 
 @NgModule({
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     CategoriaComponent,
     ProductoComponent,
     MostrarProductosComponent,
+    DetalleProductoComponent,
 
   ],
   imports: [
