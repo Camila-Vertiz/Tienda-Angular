@@ -128,4 +128,16 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    buscarProductoPorId(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/producto/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarProductoPorId:" + JSON.stringify(error));
+                });
+        });
+    }
 }

@@ -36,10 +36,10 @@ export class CelularesComponent {
   detalleProducto(producto: any) {
     let extras: NavigationExtras = {
       queryParams: {
-        producto: producto
+        idproducto: producto.id
       }
     };
-    console.log(producto);
+    console.log(producto.id_producto);
     this.router.navigate(['/detalle-producto'], extras);
   }
 }
