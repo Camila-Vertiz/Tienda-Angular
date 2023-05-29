@@ -277,4 +277,42 @@ export class ProductoComponent {
         console.log("error insertarProducto:" + er);
       });
   }
+
+  alertaBefDelete(id: number) {
+    console.log(id)
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Esta acción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.eliminarProducto(id)
+          .then(data => {
+            this.alertaPostDelete();
+          }).catch(async er => {
+          });
+      }
+    });
+  }
+
+  alertaPostDelete() {
+    Swal.fire({
+      title: 'Eliminado',
+      text: 'El producto se ha eliminado con éxito',
+      icon: 'success',
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.reload();
+      }
+    });
+  }
 }
+
