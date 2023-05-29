@@ -1,60 +1,48 @@
-
 <app-menu></app-menu>
 
 <html lang="es">
-    <body>
-        <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
-        <div th:include="usuario/menuUser.html::header-user" th:unless="${sesion==null}">  </div>
 
-        <br/>
+<body>
+    <br>
 
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-3">
-                    <input type="hidden">
-                </div>
-                <div class="col-4">
-                    <input type="hidden">
-                </div>
-                <div class="col-5">
-                    <form class="d-flex" role="search" th:action="@{/searchCelulares}" method="POST" id="busc">
-                        <input class="form-control me-2" name="dato" required="required" type="text" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn btn-dark d-none d-md-inline-block " type="submit" onclick="return Buscando()"><i class="bi bi-search"></i></button>
-                    </form>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-3">
+                <input type="hidden">
+            </div>
+            <div class="col-4">
+                <input type="hidden">
+            </div>
+            <div class="col-5">
+                <div class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por nombre"
+                        aria-label="Search" [(ngModel)]="terminoBusqueda">
+                    <button class="btn btn-warning d-none d-md-inline-block " type="submit"><i
+                            class="bi bi-search"></i></button>
                 </div>
             </div>
-            <br/>
-            <img src="../../assets/celulares/CelularesBanner.png" class="card-img-top box" alt="iphone xr">
-            <br/>
-            <br/>
-            <h1 class="text-center">¿Qué estás buscando?</h1>
-            <br/>
+        </div>
+        <br>
+        <img src="../../assets/celulares/CelularesBanner.png" class="card-img-top box" alt="iphone xr">
+        <br><br>
+        <h1 class="text-center">¿Qué estás buscando?</h1>
+        <br>
 
-            <div class="row text-center">
-
-                <div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
-                    <div class="card h-100">
-                        <img class="card-img-top" th:src="@{/images/{img}(img=${producto.imagen})}" alt="">
-                        <div class="card-body">
-                            <p class="card-text" th:text="${producto.nombre}"></p>
-                        </div>
-                        <div class="card-footer">
-                            <a th:href="@{/productoHome/{id}(id=${producto.id})}" class="btn btn-warning">Ver producto</a>
-                        </div>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4" *ngFor="let producto of getProductosFiltrados()">
+                <div class="card h-100">
+                    <img class="card-img-top" src={{producto.imagen}} alt="">
+                    <div class="card-body">
+                        <p class="card-text">{{producto.nombre}}</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-
-
-        <br/><br/><br/>
-        <div th:include="usuario/menuUser.html::footer">  </div>
-    </body>
+    <br> <br> <br> <br>
+    <br><br><br>
+</body>
 
 
 </html>
