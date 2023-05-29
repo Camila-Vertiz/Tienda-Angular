@@ -15,11 +15,23 @@ export class ProductoComponent {
   @ViewChild('mySelect') mySelect: any;
 
   myForm: FormGroup;
+  myFormAct: FormGroup;
   productos: any[] = [];
   terminoBusqueda = "";
   nombreProducto: string = '';
   idUsuario: any;
   public nuevoProducto = {
+    "nombre": "",
+    "id_categoria": 1,
+    "descripcion": "",
+    "cantidad": 10,
+    "precio": 0.0,
+    "imagen": "",
+    "id_usuario": 1,
+  }
+
+  public actualizarProducto = {
+    "id": 1,
     "nombre": "",
     "id_categoria": 1,
     "descripcion": "",
@@ -36,10 +48,16 @@ export class ProductoComponent {
   options: any[] = [];
   categoria: any;
   selectedFile: File | null = null;
-  urlImagen : string ="";
+  urlImagen: string = "";
   downloadURL: string | null = null;
-  imagenSubida:number=0;
-  
+  imagenSubida: number = 0;
+
+  nombre:any;
+  id_categoria:any;
+  descripcion:any;
+  cantidad:any;
+  precio:any;
+
   constructor(
     private storage: AngularFireStorage,
     public formBuilder: FormBuilder,
@@ -54,6 +72,16 @@ export class ProductoComponent {
     });
     this.cargarCategorias();
     this.buscarUser();
+
+    this.myFormAct = this.formBuilder.group({
+      nombre: [''],
+      categoria: [''],
+      descripcion: [''],
+      cantidad: [''],
+      precio: [''],
+      imagen: ['']
+    });
+    this.cargarCategoriasActualizar();
   }
   ngOnInit() {
     this.apiService.listarProductos().subscribe(data => {
@@ -112,6 +140,21 @@ export class ProductoComponent {
     });
   }
 
+  cargarCategoriasActualizar(){
+    this.apiService.listarCategoria().subscribe(res => {
+      console.log(res);
+      const select1 = document.getElementById('mySelect1');
+      if (select1) {
+        res.forEach(option1 => {
+          const optionElement = document.createElement('option');
+          optionElement.value = option1.id_categoria;
+          optionElement.textContent = option1.nombre;
+          select1?.appendChild(optionElement);
+        });
+      }
+    });
+  }
+
   onSelectChange(event: any) {
     this.selectedOption = event.target.value;
     this.categoria = this.selectedOption;
@@ -136,8 +179,8 @@ export class ProductoComponent {
           fileRef.getDownloadURL().subscribe(url => {
             console.log(url);
             this.downloadURL = url;
-            this.urlImagen=url;
-            this.imagenSubida=1;
+            this.urlImagen = url;
+            this.imagenSubida = 1;
           });
         })
       ).subscribe();
@@ -178,5 +221,33 @@ export class ProductoComponent {
       this.myForm.controls['precio'].setValue('');
       location.reload();
     });
+  }
+
+  abrirModalEditar(id: number, nombre: string, descripcion: string,
+    cantidad: number, precio: number, id_categoria:number, imagen:string, id_usuario:number) {
+    this.actualizarProducto.id = id;
+    this.actualizarProducto.nombre = nombre;
+    this.actualizarProducto.descripcion = descripcion;
+    this.actualizarProducto.cantidad = cantidad;
+    this.actualizarProducto.precio = precio;
+    this.actualizarProducto.id_categoria = id_categoria;
+    this.actualizarProducto.imagen = imagen;
+    this.actualizarProducto.id_usuario = id_usuario;
+    console.log(this.actualizarProducto);
+
+    this.myFormAct.value.nombre = nombre;
+    this.myFormAct.value.descripcion = descripcion;
+    this.myFormAct.value.cantidad = cantidad;
+    this.myFormAct.value.precio = precio;
+    this.myFormAct.value.categoria = id_categoria;
+    this.myFormAct.value.imagen = imagen;
+    console.log(this.myFormAct.value);
+    this.myFormAct.updateValueAndValidity();
+    this.modalEditar.nativeElement.classList.add('show');
+    document.body.classList.add('modal-open');
+  }
+
+  actualizar(){
+
   }
 }
