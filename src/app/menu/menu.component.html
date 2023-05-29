@@ -15,7 +15,7 @@
 
                 <div class="text-end">
                     <a class="btn btn-outline-light me-2" routerLink="/login">Login</a>
-                    <a class="btn btn-warning" th:href="@{/getCart}"><i class="bi bi-cart2"></i></a>
+                    <!-- <a class="btn btn-warning" th:href="@{/getCart}"><i class="bi bi-cart2"></i></a> -->
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
                             User
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small">
+                            <li><a class="dropdown-item"  routerLink="/carrito">Carrito</a></li>
                             <li><a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a></li>
-                            <li><a class="dropdown-item" th:href="@{/getCart}">Carrito</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
