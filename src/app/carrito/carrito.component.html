@@ -34,11 +34,10 @@
                                     <td>{{item.cantidad}}</td>
                                     <td>{{item.total}}</td>
                                     <td>
-                                        <form th:action="@{/delete/cart}" method="POST" id="delete">
-                                            <button onclick="return Eliminar()" class="btn btn-danger" type="submit"><i
-                                                    class="bi bi-trash-fill"></i></button>
-                                            <input type="hidden" th:value="${dorden.producto.id}" name="id">
-                                        </form>
+                                        <button class="btn btn-danger"
+                                            (click)="alertaBefDelete(item)"><i
+                                                class="bi bi-trash"></i></button>
+                                        
                                     </td>
                                 </tr>
                             </tbody>
