@@ -15,8 +15,8 @@
             <div class="col-3">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i></button>&nbsp;
-                    <button class="btn btn-warning" (click)="asc()"><i class="bi bi-sort-up"></i></button>&nbsp;
-                    <button class="btn btn-warning" (click)="desc()"><i class="bi bi-sort-down"></i></button>
+                <button class="btn btn-warning" (click)="asc()"><i class="bi bi-sort-up"></i></button>&nbsp;
+                <button class="btn btn-warning" (click)="desc()"><i class="bi bi-sort-down"></i></button>
             </div>
             <div class="col-4">
                 <input type="hidden">
@@ -74,19 +74,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/productos/guardarProducto}" enctype="multipart/form-data" method="POST"
-                        id="registrar">
+                    <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingrese nombre">
+                            <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingrese nombre"
+                                formControlName="nombre">
                         </div>
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Categoria:</label>
-                            <select name="cat" id="cat" class="form-control">
-                                <option value="">Seleccione</option>
-                                <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
-                                    th:text="${categoria.nombre}"></option>
+                            <select #mySelect id="mySelect" class="form-select" formControlName="categoria" required
+                                aria-label="Default select example" (change)="onSelectChange($event)">
+                                <option value="" disabled selected>Selecciona una categoria</option>
+                                <option *ngFor="let option of options" [value]="option.value">{{option.text}}</option>
                             </select>
                         </div>
 
@@ -109,8 +109,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="control-label col-sm-2" for="img">Imagen:</label>
-                            <input type="file" class="form-control-file" id="img" name="img">
+                            <label for="formFile" class="form-label">Imagen:</label>
+                            <input class="form-control" type="file" id="formFile">
                         </div>
                     </form>
                 </div>

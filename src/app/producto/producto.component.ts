@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 })
 export class ProductoComponent {
   @ViewChild('modalEditar') modalEditar!: ElementRef;
+  @ViewChild('mySelect') mySelect: any;
 
   myForm: FormGroup;
   productos: any[] = [];
@@ -24,12 +25,17 @@ export class ProductoComponent {
   title = "";
   msg = "";
 
+  selectedOption: any;
+  options: any[] = [];
+  categoria:any;
+
   constructor(
     public formBuilder: FormBuilder,
     private apiService: ServiciosapiService) {
     this.myForm = this.formBuilder.group({
       nombre: ['', [Validators.required]]
     });
+    this.cargarCategorias();
   }
   ngOnInit() {
     this.apiService.listarProductos().subscribe(data => {
@@ -55,5 +61,26 @@ export class ProductoComponent {
       const nombres = `${producto.nombre}`.toLowerCase();
       return nombres.includes(termino);
     });
+  }
+
+  cargarCategorias(){
+    this.apiService.listarCategoria().subscribe(res=>{
+      console.log(res);
+      const select = document.getElementById('mySelect');
+      if (select) {
+        res.forEach(option => {
+          const optionElement = document.createElement('option');
+          optionElement.value = option.id_categoria;
+          optionElement.textContent = option.nombre;
+          select?.appendChild(optionElement);
+        });
+      }
+    });
+  }
+
+  onSelectChange(event: any) {
+    this.selectedOption = event.target.value;
+    this.categoria = this.selectedOption;
+     console.log('Selected option:', this.selectedOption);
   }
 }
