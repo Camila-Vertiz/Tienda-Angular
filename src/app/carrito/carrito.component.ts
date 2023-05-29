@@ -13,24 +13,31 @@ export class CarritoComponent {
   precio:any;
   cantidad:any;
   total:any;
+  carrito:any[];
 
   constructor(
     private apiService: ServiciosapiService,
     public router: Router,
     private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.idproducto = params['idproducto'];
-      this.nombre = params['nombre'];
-      this.precio = params['precio'];
-      this.cantidad = params['cantidad'];
-    });
+  }
 
-    this.total=this.precio*this.cantidad;
-
-    console.log(this.idproducto);
-    console.log(this.nombre);
-    console.log(this.precio);
-    console.log(this.cantidad);
-    console.log(this.total);
+  ngOnInit() {
+    const id_usuario = localStorage.getItem('id_user');
+   
+    this.apiService.buscarCarritoPorCliente(id_usuario)
+      .then(data => {
+        const jsonRespuesta = JSON.stringify(data);
+        const Respuesta = JSON.parse(jsonRespuesta);
+       this.carrito = Respuesta;
+        console.log( this.carrito);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.asc();
+    console.log(this.carrito)
+  }
+  asc() {
+    this.carrito.sort((a, b) => a.id_carrito - b.id_carrito);
   }
 }
