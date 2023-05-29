@@ -1,11 +1,8 @@
 <app-menu></app-menu>
-
-<html lang="es">
-
 <body>
     <br>
-
     <div class="container">
+
         <div class="row align-items-center">
             <div class="col-3">
                 <input type="hidden">
@@ -25,27 +22,29 @@
         <br>
         <img src="../../assets/celulares/CelularesBanner.png" class="card-img-top box" alt="iphone xr">
         <br><br>
-        <h1 class="text-center">¿Qué estás buscando?</h1>
+        <h1 class="text-center">PRODUCTOS</h1>
         <br>
 
         <div class="row text-center">
+
             <div class="col-lg-3 col-md-6 mb-4" *ngFor="let producto of getProductosFiltrados()">
                 <div class="card h-100">
                     <img class="card-img-top" src={{producto.imagen}} alt="">
                     <div class="card-body">
                         <p class="card-text">{{producto.nombre}}</p>
                     </div>
-                    <div class="card-footer">
-                        <button (click)="detalleProducto(producto)" class="btn btn-warning">Ver producto</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <br> <br> <br> <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
     <br><br><br>
 </body>
 
-
-</html>
+<app-footer></app-footer>

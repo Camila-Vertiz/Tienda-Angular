@@ -1,57 +1,61 @@
 <app-menu></app-menu>
+
 <body>
     <div class="container">
         <h1 class="mt-4 mb-3">
             Categorías
         </h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/productos}">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/mostrar-productos" style="color:black;"><b>Home</b></a></li>
             <li class="breadcrumb-item active">Ver Categorías</li>
         </ol>
         <hr>
         <div class="row align-items-center">
             <div class="col-3">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i></button>
-                <a th:href="@{/categoria/orden_asc}" class="btn btn-warning"><i class="bi bi-sort-up"></i></a>
-                <a th:href="@{/categoria/orden_desc}" class="btn btn-warning"><i class="bi bi-sort-down"></i></a>
+                    data-bs-whatever="@mdo"><i class="bi bi-plus-circle"></i></button>&nbsp;
+                <button class="btn btn-warning" (click)="asc()"><i class="bi bi-sort-up"></i></button>&nbsp;
+                <button class="btn btn-warning" (click)="desc()"><i class="bi bi-sort-down"></i></button>
 
             </div>
             <div class="col-4">
                 <input type="hidden">
             </div>
             <div class="col-5">
-                <form class="d-flex" role="search" th:action="@{/categoria/buscarCategoria}" method="POST" id="busc">
-                    <input class="form-control me-2" name="dato" required="required" type="text" placeholder="Buscar"
-                        aria-label="Buscar">
+                <div class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por nombre"
+                        aria-label="Search" [(ngModel)]="terminoBusqueda">
                     <button class="btn btn-warning d-none d-md-inline-block " type="submit"><i
                             class="bi bi-search"></i></button>
-                </form>
+                </div>
             </div>
         </div>
         <br />
 
         <table class="table table-striped">
-            <tr class="table-dark">
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            <tr th:each="categoria,status : ${categorias}">
-                <td th:text="${categoria.id}"></td>
-                <td th:text="${categoria.nombre}"></td>
+            <thead>
+                <tr class="table-dark">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let categoria of getCategoriasFiltradas()">
+                    <td>{{categoria.id_categoria}}</td>
+                    <td>{{categoria.nombre}}</td>
 
-                <td>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                        th:attr="data-bs-id=${categoria.id},data-bs-nom=${categoria.nombre}"><i
-                            class="bi bi-pencil-square"></i></button>
-                </td>
-                <td>
-                    <a onclick="return Eliminar(this)" th:href="@{/categoria/eliminar(id=${categoria.id})}"
-                        class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                </td>
-            </tr>
+                    <td>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalEditar" (click)="abrirModalEditar(categoria.id_categoria, categoria.nombre)"><i
+                                class="bi bi-pencil-square"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="alertaBefDelete(categoria.id_categoria)"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
     </div>
@@ -66,23 +70,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/categoria/registrar}" method="POST" id="registrar">
+                    <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingrese nombre">
+                            <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre"
+                                placeholder="Ingrese nombre">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="return Registrar()" type="button" class="btn btn-warning">Registrar</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
+                        (click)="registrar()">Registrar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Model EDITAR/ACTUALIZAR -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" #modalEditar id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,21 +97,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/categoria/actualizar}" method="POST" id="actualizar">
-                        <input type="hidden" name="id" id="id">
+                    <form id="myForm" [formGroup]="myForm" ngNativeValidate>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="nombre" id="nomx" class="form-control"
-                                placeholder="Ingrese nombre">
+                            <input type="text" name="nom" id="nom" class="form-control" formControlName="nombre"
+                                value="{{this.Categoria.nombre}}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="return Actualizar()" type="button" class="btn btn-warning">Actualizar</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
+                        (click)="actualizar()">Actualizar</button>
                 </div>
             </div>
         </div>
     </div>
+    <br><br><br>
     <app-footer></app-footer>
 </body>

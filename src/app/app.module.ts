@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,8 +17,7 @@ import { CasesComponent } from './cases/cases.component';
 import { CelularesComponent } from './celulares/celulares.component';
 import { ComprasComponent } from './compras/compras.component';
 import { DetalleCompraComponent } from './detalleCompra/detalleCompra.component';
-import { ProductoHomeComponent } from './productoHome/productoHome.component';
-import { ResumenOrdenComponent } from './resumenOrden/resumenOrden.component';
+import { OrdenComponent } from './orden/orden.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -23,6 +25,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { CustomPsmServiceService } from './sign-up/custom-psm-service.service';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { ProductoComponent } from './producto/producto.component';
+import { MostrarProductosComponent } from './mostrar-productos/mostrar-productos.component';
+import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,10 +39,12 @@ const appRoutes: Routes = [
   { path: 'celulares', component: CelularesComponent},
   { path: 'compras', component: ComprasComponent},
   { path: 'detalle-compra', component: DetalleCompraComponent},
-  { path: 'producto', component: ProductoHomeComponent},
-  { path: 'resumen', component: ResumenOrdenComponent},
+  { path: 'producto', component: ProductoComponent},
+  { path: 'orden', component: OrdenComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'categoria', component: CategoriaComponent},
+  { path: 'mostrar-productos', component: MostrarProductosComponent},
+  { path: 'detalle-producto', component: DetalleProductoComponent},
 ];
 
 @NgModule({
@@ -55,11 +62,13 @@ const appRoutes: Routes = [
     CelularesComponent,
     ComprasComponent,
     DetalleCompraComponent,
-    ProductoHomeComponent,
-    ResumenOrdenComponent,
+    OrdenComponent,
     MenuComponent,
     UsuariosComponent,
     CategoriaComponent,
+    ProductoComponent,
+    MostrarProductosComponent,
+    DetalleProductoComponent,
 
   ],
   imports: [
@@ -68,6 +77,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     PasswordStrengthMeterModule.forRoot({ serviceClass: CustomPsmServiceService }),
     // PasswordStrengthMeterModule.forRoot()
   ],

@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
-import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cases',
-  templateUrl: './cases.component.html',
-  styleUrls: ['./cases.component.scss']
+  selector: 'app-mostrar-productos',
+  templateUrl: './mostrar-productos.component.html',
+  styleUrls: ['./mostrar-productos.component.scss']
 })
-export class CasesComponent {
+export class MostrarProductosComponent {
   productos: any[] = [];
   terminoBusqueda = "";
 
   constructor(
-    private router: Router,
     private apiService: ServiciosapiService) { }
 
   ngOnInit() {
     this.apiService.listarProductos().subscribe(data => {
-      this.productos = data.filter(producto => producto.id_categoria === 4);
+      this.productos = data;
     });
     this.productos.sort((a, b) => a.id - b.id);
   }
@@ -31,15 +29,5 @@ export class CasesComponent {
       const nombres = `${producto.nombre}`.toLowerCase();
       return nombres.includes(termino);
     });
-  }
-
-  detalleProducto(producto: any) {
-    let extras: NavigationExtras = {
-      queryParams: {
-        idproducto: producto.id
-      }
-    };
-    console.log(producto.id_producto);
-    this.router.navigate(['/detalle-producto'], extras);
   }
 }
