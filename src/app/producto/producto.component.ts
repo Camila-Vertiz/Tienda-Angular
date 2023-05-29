@@ -51,12 +51,15 @@ export class ProductoComponent {
   urlImagen: string = "";
   downloadURL: string | null = null;
   imagenSubida: number = 0;
+  subido = true;
 
-  nombre:any;
-  id_categoria:any;
-  descripcion:any;
-  cantidad:any;
-  precio:any;
+  nombre: any;
+  id_categoria: any;
+  descripcion: any;
+  cantidad: any;
+  precio: any;
+  id_usuario: any;
+  imagen: any;
 
   constructor(
     private storage: AngularFireStorage,
@@ -140,7 +143,7 @@ export class ProductoComponent {
     });
   }
 
-  cargarCategoriasActualizar(){
+  cargarCategoriasActualizar() {
     this.apiService.listarCategoria().subscribe(res => {
       console.log(res);
       const select1 = document.getElementById('mySelect1');
@@ -161,6 +164,7 @@ export class ProductoComponent {
     console.log('Selected option:', this.selectedOption);
   }
   onFileSelected(event: any) {
+    this.subido = false;
     this.selectedFile = event.target.files[0]; // Obtén el primer archivo seleccionado
     this.onUpload();
   }
@@ -181,6 +185,7 @@ export class ProductoComponent {
             this.downloadURL = url;
             this.urlImagen = url;
             this.imagenSubida = 1;
+            this.subido = true;
           });
         })
       ).subscribe();
@@ -224,30 +229,52 @@ export class ProductoComponent {
   }
 
   abrirModalEditar(id: number, nombre: string, descripcion: string,
-    cantidad: number, precio: number, id_categoria:number, imagen:string, id_usuario:number) {
-    this.actualizarProducto.id = id;
-    this.actualizarProducto.nombre = nombre;
-    this.actualizarProducto.descripcion = descripcion;
-    this.actualizarProducto.cantidad = cantidad;
-    this.actualizarProducto.precio = precio;
-    this.actualizarProducto.id_categoria = id_categoria;
-    this.actualizarProducto.imagen = imagen;
-    this.actualizarProducto.id_usuario = id_usuario;
-    console.log(this.actualizarProducto);
+    cantidad: number, precio: number, id_categoria: number, imagen: string, id_usuario: number) {
 
-    this.myFormAct.value.nombre = nombre;
-    this.myFormAct.value.descripcion = descripcion;
-    this.myFormAct.value.cantidad = cantidad;
-    this.myFormAct.value.precio = precio;
-    this.myFormAct.value.categoria = id_categoria;
-    this.myFormAct.value.imagen = imagen;
-    console.log(this.myFormAct.value);
-    this.myFormAct.updateValueAndValidity();
+    this.actualizarProducto.id = id;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.cantidad = cantidad;
+    this.precio = precio;
+    this.id_categoria = id_categoria;
+    this.id_usuario = id_usuario;
+    this.imagen = imagen;
+
+
     this.modalEditar.nativeElement.classList.add('show');
     document.body.classList.add('modal-open');
   }
 
-  actualizar(){
+  actualizar() {
+    console.log(this.actualizarProducto);
+    if (this.imagenSubida == 1) {
+      this.actualizarProducto.nombre = this.nombre;
+      this.actualizarProducto.descripcion = this.descripcion;
+      this.actualizarProducto.cantidad = this.cantidad;
+      this.actualizarProducto.precio = this.precio;
+      this.actualizarProducto.id_categoria = this.id_categoria;
+      this.actualizarProducto.id_usuario = this.id_usuario;
+      this.actualizarProducto.imagen = this.urlImagen;
+    }
+    else {
+      this.actualizarProducto.nombre = this.nombre;
+      this.actualizarProducto.descripcion = this.descripcion;
+      this.actualizarProducto.cantidad = this.cantidad;
+      this.actualizarProducto.precio = this.precio;
+      this.actualizarProducto.id_categoria = this.id_categoria;
+      this.actualizarProducto.id_usuario = this.id_usuario;
+      this.actualizarProducto.imagen = this.imagen;
+    }
+    // this.actualizarProducto.imagen = this.imagen;
+    console.log(this.actualizarProducto);
 
+    this.apiService.insertarProducto(this.actualizarProducto)
+      .then(data => {
+        this.title = "Actualización exitosa";
+        this.msg = "Producto acualizado con éxito";
+        this.alertaSuccess();
+      }).catch(async er => {
+        console.log("error insertarProducto:" + er);
+      });
   }
 }

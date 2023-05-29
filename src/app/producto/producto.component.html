@@ -118,8 +118,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid"
-                        (click)="registrar()">Registrar</button>
+                    <button type="button" class="btn btn-warning" [disabled]="!myForm.valid || !subido"
+                    (click)="registrar()">Registrar</button>
                 </div>
             </div>
         </div>
@@ -138,13 +138,13 @@
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
                             <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingrese nombre"
-                                formControlName="nombre" value="{{this.actualizarProducto.nombre}}">
+                                formControlName="nombre"  [(ngModel)]="nombre" value="{{this.actualizarProducto.nombre}}">
                         </div>
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Categoria:</label>
                             <select #mySelect1 id="mySelect1" class="form-select" formControlName="categoria" required
-                                aria-label="Default select example" [(ngModel)]="this.actualizarProducto.id_categoria" (change)="onSelectChange($event)">
+                                aria-label="Default select example" [(ngModel)]="id_categoria" (change)="onSelectChange($event)">
                                 <option value="" disabled selected>Selecciona una categoria</option>
                                 <option *ngFor="let option1 of options" [value]="option1.value">{{option1.text}}</option>
                             </select>
@@ -153,19 +153,19 @@
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Descripción:</label>
                             <textarea class="form-control" name="desc" id="desc" placeholder="Ingrese descripción"
-                                formControlName="descripcion" value="{{this.actualizarProducto.descripcion}}"></textarea>
+                                formControlName="descripcion"  [(ngModel)]="descripcion" value="{{this.actualizarProducto.descripcion}}"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Cantidad: </label>
                             <input type="number" name="cant" id="cant" class="form-control" formControlName="cantidad"
-                                placeholder="Ingrese cantidad" value="{{this.actualizarProducto.cantidad}}">
+                                placeholder="Ingrese cantidad"  [(ngModel)]="cantidad" value="{{this.actualizarProducto.cantidad}}">
                         </div>
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Precio:</label>
                             <input type="number" name="prec" id="prec" class="form-control" formControlName="precio"
-                                placeholder="Ingrese precio" value="{{this.actualizarProducto.precio}}">
+                                placeholder="Ingrese precio"  [(ngModel)]="precio" value="{{this.actualizarProducto.precio}}">
                         </div>
 
                         <div class="mb-3">
@@ -177,7 +177,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" [disabled]="!myFormAct.valid"
+                    <button type="button" class="btn btn-warning" [disabled]="!myFormAct.valid || !subido"
                         (click)="actualizar()">Registrar</button>
                 </div>
             </div>
