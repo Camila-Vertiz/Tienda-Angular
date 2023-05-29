@@ -10,12 +10,16 @@ import { Router } from '@angular/router';
 export class OrdenComponent {
 
   cliente: any;
+  carrito: any[];
+  total: any;
 
   constructor(
     private router: Router,
     private apiService: ServiciosapiService
   ) {
     this.buscarUser();
+    this.buscarCarritoPorCliente();
+
   }
 
   buscarUser() {
@@ -31,6 +35,31 @@ export class OrdenComponent {
       .catch(error => {
         //console.log(error);
       });
+  }
+
+  buscarCarritoPorCliente() {
+    const id_usuario = localStorage.getItem('id_user');
+    this.apiService.buscarCarritoPorCliente(id_usuario)
+      .then(data => {
+        const jsonRespuesta = JSON.stringify(data);
+        const Respuesta = JSON.parse(jsonRespuesta);
+        this.carrito = Respuesta;
+        console.log(this.carrito);
+        this.asc();
+        this.calcularTotal();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+
+  asc() {
+    this.carrito.sort((a, b) => a.id_carrito - b.id_carrito);
+  }
+
+  calcularTotal() {
+    this.total = this.carrito.reduce((accumulator, element) => accumulator + element.total, 0);
   }
 
 }

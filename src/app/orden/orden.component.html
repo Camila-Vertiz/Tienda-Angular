@@ -38,13 +38,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="dtorden:${cart}">
-                                            <td th:text="${dtorden.nombre}"></td>
-                                            <td th:text="${dtorden.precio}"></td>
-                                            <td th:text="${dtorden.cantidad}"></td>
-                                            <td th:text="${dtorden.total}"></td>
-
+                                        <tr *ngFor="let item of carrito">
+                                            <td>{{ item.nombre }}</td>
+                                            <td>{{ item.precio | number:'1.2-2' }}</td>
+                                            <td>{{ item.cantidad }}</td>
+                                            <td>{{ item.total | number:'1.2-2' }}</td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -58,7 +58,7 @@
 
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <h5 th:text=" 'Total: '+${orden.total}"></h5>
+                                <h5>S/. {{total| number:'1.2-2'}}</h5>
                             </li>
                             <a th:href="@{/saveOrder}" class="btn btn-warning">Generar</a>
                         </ul>

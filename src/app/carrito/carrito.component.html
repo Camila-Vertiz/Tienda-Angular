@@ -30,14 +30,13 @@
                             <tbody>
                                 <tr *ngFor="let item of carrito">
                                     <td>{{item.nombre}}</td>
-                                    <td>{{item.precio}}</td>
+                                    <td>{{ item.precio | number:'1.2-2' }}</td>
                                     <td>{{item.cantidad}}</td>
-                                    <td>{{item.total}}</td>
+                                    <td>{{ item.total | number:'1.2-2' }}</td>
                                     <td>
-                                        <button class="btn btn-danger"
-                                            (click)="alertaBefDelete(item)"><i
+                                        <button class="btn btn-danger" (click)="alertaBefDelete(item)"><i
                                                 class="bi bi-trash"></i></button>
-                                        
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -50,7 +49,7 @@
                         <br>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <h5>S/. {{total}}</h5>
+                                <h5>S/. {{total| number:'1.2-2'}}</h5>
                             </li>
                             <a routerLink="/orden" class="btn btn-warning">Ver Orden</a>
                         </ul>
