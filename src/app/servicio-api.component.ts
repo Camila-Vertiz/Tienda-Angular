@@ -104,4 +104,16 @@ export class ServiciosapiService {
     listarProductos() {
         return this.http.get<any[]>(this.url + '/producto/listar');
     }
+
+    insertarProducto(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/producto/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarProducto: " + JSON.stringify(error));
+                });
+        });
+    }
 }

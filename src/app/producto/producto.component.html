@@ -110,7 +110,7 @@
 
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Imagen:</label>
-                            <input class="form-control" type="file" id="formFile" formControlName="imagen">
+                            <input class="form-control" type="file" id="formFile" accept=".png, .jpg" (change)="onFileSelected($event)" formControlName="imagen" >
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -68,6 +71,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     PasswordStrengthMeterModule.forRoot({ serviceClass: CustomPsmServiceService }),
     // PasswordStrengthMeterModule.forRoot()
   ],
