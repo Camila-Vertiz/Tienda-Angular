@@ -30,4 +30,8 @@ export class CelularesComponent {
       return nombres.includes(termino);
     });
   }
+
+  detalleProducto(producto: any) {
+    console.log(producto)
+  }
 }

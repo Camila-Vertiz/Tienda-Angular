@@ -30,4 +30,8 @@ export class CasesComponent {
       return nombres.includes(termino);
     });
   }
+
+  detalleProducto(producto: any) {
+    console.log(producto)
+  }
 }
