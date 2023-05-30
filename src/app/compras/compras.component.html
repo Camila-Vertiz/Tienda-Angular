@@ -1,59 +1,51 @@
-
-
 <app-menu></app-menu>
 
-<html lang="es">
-    <body>
+<body>
 
-        <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
-        <div th:include="usuario/menuUser.html::header-user" th:unless="${sesion==null}">  </div>
+    <!-- Page Content -->
+    <div class="container">
 
-        <!-- Page Content -->
-        <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            Compras
+        </h1>
 
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/home" style="color:black"><b>Home</b></a></li>
+            <li class="breadcrumb-item active">Compras</li>
+        </ol>
 
-            <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">
-                A&C Accesorios <small>/ Compras</small>
-            </h1>
-
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-                <li class="breadcrumb-item active">Compras</li>
-            </ol>
-
-            <!-- Blog Post -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="table-dark">
-                                        <th scope="col">No. de Orden</th>
-                                        <th scope="col">Fecha</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="orden: ${ordenes}">
-                                        <td th:text="${orden.numero}"></td>
-                                        <td th:text="${orden.fechaCreacion}"></td>
-                                        <td th:text="${orden.total}"></td>
-                                        <td><a th:href="@{/usuario/detalle/{id} (id=${orden.id})}" class="btn btn-warning">Ver Detalle</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th scope="col">No. de Orden</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let orden of ordenes">
+                                    <td>{{orden.numero}}</td>
+                                    <td>{{orden.fecha_creacion}}</td>
+                                    <td>{{orden.total| number:'1.2-2'}}</td>
+                                    <td><button (click)="verDetalle(orden.id_orden)"
+                                            class="btn btn-warning">Ver Detalle</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <br><br><br>
 
-        <div th:include="usuario/menuUser.html::footer">  </div>
+</body>
 
-    </body>
-
-
-</html>
+<app-footer></app-footer>
