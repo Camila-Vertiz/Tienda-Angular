@@ -1,11 +1,10 @@
-
 <app-menu></app-menu>
 <html lang="es">
 
 <body>
 
-    <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}">  </div>
-    <div th:include="usuario/menuUser.html::header-user" th:unless="${sesion==null}">  </div>
+    <div th:include="usuario/menuUser.html::header1" th:if="${sesion==null}"> </div>
+    <div th:include="usuario/menuUser.html::header-user" th:unless="${sesion==null}"> </div>
 
     <!-- Page Content -->
     <div class="container">
@@ -13,12 +12,12 @@
 
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3">
-            A&C Accesorios <small>/ Detalle Compra</small>
+            Detalle Compra
         </h1>
 
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/usuario/compras}">Compras</a></li>
+            <li class="breadcrumb-item"><a routerLink="/home" style="color:black"><b>Home</b></a></li>
+            <li class="breadcrumb-item"><a routerLink="/compras" style="color:black">Compras</a></li>
             <li class="breadcrumb-item active">Detalle de Compra</li>
         </ol>
 
@@ -31,17 +30,17 @@
                             <thead>
                                 <tr class="table-dark">
                                     <th scope="col">Cantidad</th>
-                                    <th scope="col">Producto</th>                  
+                                    <th scope="col">Producto</th>
                                     <th scope="col">Precio</th>
-                                    <th scope="col">Total</th>                  
+                                    <th scope="col">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="detalle: ${detalles}">
-                                    <td th:text="${detalle.cantidad}"></td>
-                                    <td th:text="${detalle.nombre}"></td>
-                                    <td th:text="${detalle.precio}"></td>
-                                    <td th:text="${detalle.total}"></td>
+                                <tr *ngFor="let item of detalle">
+                                    <td>{{ item.cantidad }}</td>
+                                    <td>{{ item.nombre }}</td>
+                                    <td>{{ item.precio| number:'1.2-2' }}</td>
+                                    <td>{{ item.total | number:'1.2-2'}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,9 +49,10 @@
             </div>
         </div>
     </div>
-    
-    <div th:include="usuario/menuUser.html::footer">  </div>
+
 
 </body>
+
+<app-footer></app-footer>
 
 </html>

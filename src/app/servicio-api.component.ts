@@ -175,4 +175,56 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    listarOrden() {
+        return this.http.get<any[]>(this.url + '/orden/listar');
+    }
+
+    insertarOrden(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/orden/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarOrden: " + JSON.stringify(error));
+                });
+        });
+    }
+
+    insertarDetalleOrden(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/detalleOrden/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarOrden: " + JSON.stringify(error));
+                });
+        });
+    }
+
+    buscarOrdenPorCliente(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/orden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarCarritoPorCliente:" + JSON.stringify(error));
+                });
+        });
+    }
+
+    listarDetallePorOrden(id: any) {
+    return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/detalleOrden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api listarDetallePorOrden:" + JSON.stringify(error));
+                });
+        });
+    }
 }
