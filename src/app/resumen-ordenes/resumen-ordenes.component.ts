@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-resumen-ordenes',
@@ -14,6 +15,7 @@ export class ResumenOrdenesComponent {
   terminoBusqueda = "";
 
   constructor(
+    private router: Router,
     private apiService: ServiciosapiService) {
   }
 
@@ -22,7 +24,7 @@ export class ResumenOrdenesComponent {
       this.ordenes = data;
       this.actualizarFecha();
       this.calcularTotal();
-      this.cant=this.ordenes.length;
+      this.cant = this.ordenes.length;
     });
   }
 
@@ -57,4 +59,13 @@ export class ResumenOrdenesComponent {
     this.total = this.ordenes.reduce((accumulator, element) => accumulator + element.total, 0);
   }
 
+  verDetalle(id_orden: number) {
+    let extras: NavigationExtras = {
+      queryParams: {
+        id_orden: id_orden
+      }
+    };
+    console.log(id_orden);
+    this.router.navigate(['/resumen-detalle-orden'], extras);
+  }
 }

@@ -50,9 +50,9 @@
                                     <td>{{orden.numero}}</td>
                                     <td>{{orden.fechaCreacion}}</td>
                                     <td>{{orden.total| number:'1.2-2'}}</td>
-                                    <td><a th:href="@{/administrador/detalle/{id} (id=${orden.id})}"
-                                            class="btn btn-warning">Ver Detalle</a></td>
-                                </tr>
+                                    <td><button (click)="verDetalle(orden.id_orden)"
+                                        class="btn btn-warning">Ver Detalle</button></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
