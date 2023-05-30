@@ -1,0 +1,166 @@
+<app-menu></app-menu>
+<html lang="es">
+
+<body style="background-color:#212529;" class="align-items-center">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-3"></div>
+
+            <div class="col-6">
+                <br> <br>
+                <h1 class="mb-3 text-warning text-center">Sign Up</h1>
+                <br>
+                <form id="myForm" [formGroup]="myForm" ngNativeValidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="nombre" class="form-label text-white">Nombres</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre"
+                                required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="username" class="form-label text-white">Username</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-control" formControlName="username"
+                                    placeholder="Username" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label text-white">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="you@example.com" formControlName="email" required>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="col-auto">
+                                <label for="inputPassword6" class="col-form-label text-white">Contraseña</label>
+                            </div>
+
+                            <div class="col-auto">
+                                <input type="password" id="inputPassword" class="form-control" [ngClass]="{
+                                    'is-invalid': password?.invalid && (password?.dirty || password?.touched)
+                                  }" placeholder="Password" aria-describedby="passwordHelpBlock"
+                                    formControlName="password" autocomplete="current-password" />
+                                <span id="passwordHelpInline" class="form-text" style="color:#BABABA">
+                                    Debe tener 8-20 caracteres de largo, contener letras, números y por lo menos una mayúsucla y un caracter especial.
+                                </span>
+                                <password-strength-meter [password]="password?.value" [numberOfProgressBarItems]="5"
+                                    [enableFeedback]="true"
+                                    (strengthChange)="onPasswordStrengthChanged($event)"></password-strength-meter>
+                                <label class="form-text" style="color:#BABABA">Su contraseña es: {{texto}}</label>
+                            </div>
+
+                            <div class="col-auto">
+
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="inputPassword6" class="col-form-label text-white">Escriba de nuevo la
+                                    contraseña</label>
+                            </div>
+
+                            <div class="col-auto">
+                                <input type="password" class="form-control" formControlName="password2"
+                                    aria-describedby="passwordHelpInline">
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="col-12">
+                            <label for="username" class="form-label text-white">Telefono</label>
+                            <input type="text" class="form-control" formControlName="telefono"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').substring(0, 9);"
+                                required>
+
+                        </div>
+
+                        <div class="col-12">
+                            <label for="direccion" class="form-label text-white">Dirección</label>
+                            <input type="text" class="form-control" formControlName="direccion"
+                                placeholder="Av. Independencia #123" required>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="state" class="form-label text-white">Departamento</label>
+                            <select class="form-select" id="region" name="departamento" formControlName="departamento"
+                                required>
+                                <option value="">Selecciona...</option>
+                                <option>Amazonas</option>
+                                <option>Ancash</option>
+                                <option>Apurimac</option>
+                                <option>Arequipa</option>
+                                <option>Ayacucho</option>
+                                <option>Cajamarca</option>
+                                <option>Callao</option>
+                                <option>Cuzco</option>
+                                <option>Huancavelica</option>
+                                <option>Huanuco</option>
+                                <option>Ica</option>
+                                <option>Junín</option>
+                                <option>La Libertad</option>
+                                <option>Lambayeque</option>
+                                <option>Lima</option>
+                                <option>Loreto</option>
+                                <option>Madre de Dios</option>
+                                <option>Moquegua</option>
+                                <option>Pasco</option>
+                                <option>Piura</option>
+                                <option>Puno</option>
+                                <option>San Martín</option>
+                                <option>Tacna</option>
+                                <option>Tumbes</option>
+                                <option>Ucayali</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="city" class="form-label text-white">Provincia</label>
+                            <input type="text" class="form-control" formControlName="provincia" required>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="city" class="form-label text-white">Distrito</label>
+                            <input type="text" class="form-control" formControlName="distrito" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="zip" class="form-label text-white">Zip</label>
+                            <input type="text" class="form-control" id="zip" name="zip" formControlName="zip" required>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <button class="w-100 btn btn-warning" type="submit" (click)="signup()"
+                                [disabled]="!myForm.valid"><b>Sign Up</b></button>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-3"></div>
+        </div>
+        <br><br><br>
+    </div>
+
+</body>
+
+<app-footer></app-footer>
+
+</html>

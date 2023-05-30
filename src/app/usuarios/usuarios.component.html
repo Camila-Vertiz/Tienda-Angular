@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+
+<body>
+    <br>
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            Usuarios
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/producto" style="color:black;font-weight: bold;">Home</a></li>
+            <li class="breadcrumb-item active">Ver Usuarios</li>
+        </ol>
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Dirección</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.direccion }}, {{cliente.departamento}}, {{cliente.provincia}}, {{cliente.distrito}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+    <app-footer></app-footer>
+</body>

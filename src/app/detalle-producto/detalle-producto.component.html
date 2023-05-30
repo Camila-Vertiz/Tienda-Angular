@@ -1,0 +1,53 @@
+<app-menu></app-menu>
+<body>
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+          Producto
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/home" style="color:black;"><b>Home</b></a></li>
+            <li class="breadcrumb-item active">Producto</li>
+        </ol>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <a> <img class="img-fluid rounded" src="{{producto.imagen}}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-6 align-items-center">
+                            <br>
+                            <input type="hidden" name="id">
+                            <h2 class="card-title text-center">{{producto.nombre}}</h2>
+                            <br>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5>Precio: S/. {{producto.precio}}</h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Descripcion: {{producto.descripcion}}</h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>
+                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                            min="1" max="5" value="1" [(ngModel)]="cantidad">
+                                    </h5>
+                                </li>
+                            </ul>
+
+                            <br>
+                            <button type="submit" class="btn btn-warning" (click)="setCart()">Añadir al carrito </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+</body>
+<app-footer></app-footer>
