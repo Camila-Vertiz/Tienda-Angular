@@ -85,15 +85,16 @@
         <br>
 
         <form th:action="@{/usuario/saveSuscripcion}" method="post" id="registrar">
-          <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required [(ngModel)]="email">
           <div class="invalid-feedback">
             Por favor ingrese una dirección de correo válida para la actualización del envío.
           </div>
           <br>
-          <button (click)="registrar()" type="button" class="btn btn-warning">
-           <i class="bi bi-send-fill"></i>
+          <button (click)="registrar()" type="button" class="btn btn-warning" [disabled]="!validarEmail()">
+            <i class="bi bi-send-fill"></i>
             Suscribirse
           </button>
+          
         </form>
       </div>
       <div class="col-sm-1 align-items-center">

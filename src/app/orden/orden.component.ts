@@ -62,4 +62,8 @@ export class OrdenComponent {
     this.total = this.carrito.reduce((accumulator, element) => accumulator + element.total, 0);
   }
 
+  generar(){
+
+    console.log("xd"+this.carrito);
+  }
 }
