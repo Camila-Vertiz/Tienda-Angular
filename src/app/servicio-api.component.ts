@@ -231,6 +231,19 @@ export class ServiciosapiService {
         });
     }
 
+    ventasPorCliente(id: any): Promise<number> {
+        return new Promise((resolve, reject) => {
+          this.http.get(this.url + '/orden/ventas/' + id)
+            .subscribe(response => {
+              resolve(response as number);
+              //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+            }, (error) => {
+              reject("Error api ventasPorCliente: " + JSON.stringify(error));
+            });
+        });
+      }
+      
+
     listarDetallePorOrden(id: any) {
     return new Promise((resolve, reject) => {
             this.http.get(this.url + '/detalleOrden/listar/' + id)

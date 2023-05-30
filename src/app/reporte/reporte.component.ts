@@ -17,7 +17,7 @@ export class ReporteComponent {
     private apiService: ServiciosapiService) {
   }
   ngOnInit() {
-    this.getClientes();
+    this.memato();
     google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(this.drawChart);
   }
@@ -40,7 +40,7 @@ export class ReporteComponent {
     chart.draw(data, null);
   }
 
- 
+
 
   getClientes() {
     this.apiService.listarClientes().subscribe(data => {
@@ -68,4 +68,20 @@ export class ReporteComponent {
       });
     });
   }
+
+  memato() {
+    const graphData2: Map<string, number> = new Map<string, number>();
+    this.apiService.listarClientes().subscribe(async data => {
+      this.clientes = data;
+      console.log("cli:", this.clientes);
+      for (let i = 0; i < this.clientes.length; i++) {
+        const id: number = this.clientes[i].id;
+        const nom: string = this.clientes[i].nombre;
+        const cant: number = await this.apiService.ventasPorCliente(id);
+        graphData2.set(nom, cant);
+      }
+    });
+    console.log("graphData2: ", graphData2)
+  }
+
 }
