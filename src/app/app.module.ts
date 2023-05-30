@@ -28,6 +28,7 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { ProductoComponent } from './producto/producto.component';
 import { MostrarProductosComponent } from './mostrar-productos/mostrar-productos.component';
 import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
+import { ResumenOrdenesComponent } from './resumen-ordenes/resumen-ordenes.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   { path: 'categoria', component: CategoriaComponent},
   { path: 'mostrar-productos', component: MostrarProductosComponent},
   { path: 'detalle-producto', component: DetalleProductoComponent},
+  { path: 'resumen-ordenes', component: ResumenOrdenesComponent},
 ];
 
 @NgModule({
@@ -69,6 +71,7 @@ const appRoutes: Routes = [
     ProductoComponent,
     MostrarProductosComponent,
     DetalleProductoComponent,
+    ResumenOrdenesComponent,
 
   ],
   imports: [
