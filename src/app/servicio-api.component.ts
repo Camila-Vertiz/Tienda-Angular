@@ -65,6 +65,18 @@ export class ServiciosapiService {
         });
     }
 
+    insertarSuscripcion(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/suscripcion/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API suscripcion: " + JSON.stringify(error));
+                });
+        });
+    }
+
     setUserLoggedIn(userLoggedIn: boolean) {
         this.userLoggedIn.next(userLoggedIn);
     }
@@ -188,6 +200,58 @@ export class ServiciosapiService {
                     //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
                 }, (error) => {
                     reject("error API insertarOrden: " + JSON.stringify(error));
+                });
+        });
+    }
+
+    insertarDetalleOrden(data: any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + '/detalleOrden/insertar', data, this.options)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("respuesta API insertarClienteBD_Gmail: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("error API insertarOrden: " + JSON.stringify(error));
+                });
+        });
+    }
+    listarOrdenPorCliente(id: any) {
+        return this.http.get<any[]>(this.url + '/orden/listar/' + id);
+    }
+    
+    buscarOrdenPorCliente(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/orden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarCarritoPorCliente:" + JSON.stringify(error));
+                });
+        });
+    }
+
+    ventasPorCliente(id: any): Promise<number> {
+        return new Promise((resolve, reject) => {
+          this.http.get(this.url + '/orden/ventas/' + id)
+            .subscribe(response => {
+              resolve(response as number);
+              //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+            }, (error) => {
+              reject("Error api ventasPorCliente: " + JSON.stringify(error));
+            });
+        });
+      }
+      
+
+    listarDetallePorOrden(id: any) {
+    return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/detalleOrden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api listarDetallePorOrden:" + JSON.stringify(error));
                 });
         });
     }

@@ -43,7 +43,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small">
                             <li><a class="dropdown-item"  routerLink="/carrito">Carrito</a></li>
-                            <li><a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a></li>
+                            <li><a class="dropdown-item" routerLink="/compras">Compras</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -77,8 +77,8 @@
                             <li><a class="dropdown-item" routerLink="/usuarios">Usuarios</a></li>
                             <li><a class="dropdown-item" routerLink="/categoria">Categorías</a></li>
                             <li><a class="dropdown-item" routerLink="/producto">Productos</a></li>
-                            <li><a class="dropdown-item" routerLink="/ordenes">Ordenes</a></li>
-                            <li><a class="dropdown-item" routerLink="/reporte">Reporte</a></li>
+                            <li><a class="dropdown-item" routerLink="/resumen-ordenes">Ordenes</a></li>
+                            <!-- <li><a class="dropdown-item" routerLink="/reporte">Reporte</a></li> -->
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
                         </ul>

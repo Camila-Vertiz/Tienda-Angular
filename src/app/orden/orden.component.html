@@ -60,7 +60,7 @@
                             <li class="list-group-item">
                                 <h5>S/. {{total| number:'1.2-2'}}</h5>
                             </li>
-                            <a th:href="@{/saveOrder}" class="btn btn-warning">Generar</a>
+                            <a (click)="generar()" class="btn btn-warning">Generar</a>
                         </ul>
                     </div>
                 </div>

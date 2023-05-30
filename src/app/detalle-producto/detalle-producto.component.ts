@@ -22,7 +22,7 @@ export class DetalleProductoComponent {
     "nombre": "",
     "precio": 0.0,
     "total": 0.0,
-    "estado":1
+    "estado": 1
   }
 
   constructor(
@@ -55,36 +55,36 @@ export class DetalleProductoComponent {
       });
   }
 
+  // async setCart() {
+  //   await this.verificarProductoExiste();
+  //   if (this.existe) {
+  //     console.log("producto duplicado");
+  //     this.alertaError();
+  //   }
+  //   else {
+  //     const id = localStorage.getItem('id_user');
+  //     if (id) {
+  //       let id_usuario = parseInt(id);
+  //       this.carrito.id_usuario = id_usuario;
+  //     }
+  //     this.carrito.cantidad = this.cantidad;
+  //     this.carrito.nombre = this.producto.nombre;
+  //     this.carrito.precio = this.producto.precio;
+  //     this.carrito.total = this.cantidad * this.producto.precio;
+  //     this.carrito.id_producto = this.producto.id_producto;
+
+  //     console.log(this.carrito);
+
+  //     this.apiService.insertarCarrito(this.carrito)
+  //       .then(data => {
+  //         this.alertaSuccess();
+  //       }).catch(async er => {
+  //         console.log("error insertarCategoria:" + er);
+  //       });
+  //   }
+  // }
+
   setCart() {
-    this.verificarProductoExiste();
-    if (this.existe) {
-      console.log("producto duplicado");
-      this.alertaError();
-    }
-    else {
-      const id = localStorage.getItem('id_user');
-      if (id) {
-        let id_usuario = parseInt(id);
-        this.carrito.id_usuario = id_usuario;
-      }
-      this.carrito.cantidad = this.cantidad;
-      this.carrito.nombre = this.producto.nombre;
-      this.carrito.precio = this.producto.precio;
-      this.carrito.total = this.cantidad * this.producto.precio;
-      this.carrito.id_producto = this.producto.id_producto;
-
-      console.log(this.carrito);
-
-      this.apiService.insertarCarrito(this.carrito)
-      .then(data => {
-        this.alertaSuccess();
-      }).catch(async er => {
-        console.log("error insertarCategoria:" + er);
-      });
-    }
-  }
-
-  verificarProductoExiste() {
     const id_usuario = localStorage.getItem('id_user');
     const carrito = {
       "id_producto": this.idProducto,
@@ -98,10 +98,28 @@ export class DetalleProductoComponent {
         const Respuesta = JSON.parse(jsonRespuesta);
         let flag = Respuesta[0].ind_producto;
         if (flag == 0) {
-          this.existe = false;
+          const id = localStorage.getItem('id_user');
+          if (id) {
+            let id_usuario = parseInt(id);
+            this.carrito.id_usuario = id_usuario;
+          }
+          this.carrito.cantidad = this.cantidad;
+          this.carrito.nombre = this.producto.nombre;
+          this.carrito.precio = this.producto.precio;
+          this.carrito.total = this.cantidad * this.producto.precio;
+          this.carrito.id_producto = this.producto.id_producto;
+
+          console.log(this.carrito);
+
+          this.apiService.insertarCarrito(this.carrito)
+            .then(data => {
+              this.alertaSuccess();
+            }).catch(async er => {
+              console.log("error insertarCategoria:" + er);
+            });
         }
         else {
-          this.existe = true;
+          this.alertaError();
         }
         console.log(this.existe);
 
@@ -117,7 +135,7 @@ export class DetalleProductoComponent {
       text: "Producto agregado al carrito con éxito",
       confirmButtonText: 'OK',
     }).then(() => {
-    this.router.navigate(['/carrito']);
+      this.router.navigate(['/carrito']);
     });
   }
 

@@ -4,11 +4,11 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-detalleCompra',
-  templateUrl: './detalleCompra.component.html',
-  styleUrls: ['./detalleCompra.component.scss']
+  selector: 'app-resumen-detalle-orden',
+  templateUrl: './resumen-detalle-orden.component.html',
+  styleUrls: ['./resumen-detalle-orden.component.scss']
 })
-export class DetalleCompraComponent {
+export class ResumenDetalleOrdenComponent {
   id_orden: number;
   detalle: any[];
 

@@ -1,0 +1,89 @@
+<app-menu></app-menu>
+
+<head>
+    <!-- Google Charts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Dibujar el gráfico -->
+    <script th:inline="javascript">
+        var real_data = /*[[${graphData}]]*/'noValue';
+        var real_data2 = /*[[${graphData2}]]*/'noValue';
+        $(document).ready(function () {
+            google.charts.load('current', {
+                packages: ['corechart', 'bar']
+            });
+            google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.setOnLoadCallback(drawPieChart);
+        });
+        function drawColumnChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Producto');
+            data.addColumn('number', 'Cantidad');
+            Object.keys(real_data).forEach(function (key) {
+                data.addRow([key, real_data[key]]);
+            });
+            var options = {
+                title: 'Cantidad de Ventas por Producto',
+                hAxis: {
+                    title: 'Producto'
+                },
+                vAxis: {
+                    title: 'Cantidad'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('barras'));
+            chart.draw(data, options);
+        }
+        function drawPieChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Cliente');
+            data.addColumn('number', 'Cantidad');
+            Object.keys(real_data2).forEach(function (key) {
+                data.addRow([key, real_data2[key]]);
+            });
+            var options = {
+                title: 'Cantidad de Ventas por Cliente',
+                is3D: true,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('circular'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            Reporte
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/mostrar-productos" style="color:black"><b>Home</b></a></li>
+            <li class="breadcrumb-item active">Reporte</li>
+        </ol>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="barras"></div>
+                        <br>
+                        <div id="circular" style="width: 900px; height: 500px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <br><br><br>
+    <app-footer></app-footer>
+
+</body>
