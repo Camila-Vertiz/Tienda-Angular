@@ -33,7 +33,7 @@
                                 <tr *ngFor="let orden of ordenes">
                                     <td>{{orden.numero}}</td>
                                     <td>{{orden.fecha_creacion}}</td>
-                                    <td>{{orden.total}}</td>
+                                    <td>{{orden.total| number:'1.2-2'}}</td>
                                     <td><button (click)="verDetalle(orden.id_orden)"
                                             class="btn btn-warning">Ver Detalle</button></td>
                                 </tr>

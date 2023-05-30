@@ -215,4 +215,16 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    listarDetallePorOrden(id: any) {
+    return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/detalleOrden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api listarDetallePorOrden:" + JSON.stringify(error));
+                });
+        });
+    }
 }
