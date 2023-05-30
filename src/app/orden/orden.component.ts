@@ -211,9 +211,6 @@ export class OrdenComponent {
 
   }
 
-  
-
-
   alertaSuccess() {
     Swal.fire({
       icon: 'success',

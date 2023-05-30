@@ -203,4 +203,16 @@ export class ServiciosapiService {
                 });
         });
     }
+
+    buscarOrdenPorCliente(id: any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(this.url + '/orden/listar/' + id)
+                .subscribe(response => {
+                    resolve(response);
+                    //console.log("Respuesta api buscarUsuarioPorId: " + JSON.stringify(response));
+                }, (error) => {
+                    reject("Error api buscarCarritoPorCliente:" + JSON.stringify(error));
+                });
+        });
+    }
 }
