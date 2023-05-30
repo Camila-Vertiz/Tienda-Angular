@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,9 +28,21 @@ export class HomeComponent {
   console.log(this.suscripcion);
   this.apiService.insertarSuscripcion(this.suscripcion)
     .then(data => {
+      this.alertaSuccess();
     }).catch(async er => {
 
       console.log("error actualizarPublicidad:" + er);
+    });
+  }
+
+  alertaSuccess() {
+    Swal.fire({
+      icon: 'success',
+      title: "Suscripción exitoso",
+      text: "Se ha suscrito con éxito",
+      confirmButtonText: 'OK',
+    }).then(() => {
+      this.email="";
     });
   }
 }
