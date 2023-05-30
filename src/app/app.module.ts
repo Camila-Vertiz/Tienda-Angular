@@ -30,6 +30,7 @@ import { MostrarProductosComponent } from './mostrar-productos/mostrar-productos
 import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 import { ResumenOrdenesComponent } from './resumen-ordenes/resumen-ordenes.component';
 import { ResumenDetalleOrdenComponent } from './resumen-detalle-orden/resumen-detalle-orden.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
   { path: 'detalle-producto', component: DetalleProductoComponent},
   { path: 'resumen-ordenes', component: ResumenOrdenesComponent},
   { path: 'resumen-detalle-orden', component: ResumenDetalleOrdenComponent},
+  { path: 'reporte', component: ReporteComponent},
 ];
 
 @NgModule({
@@ -75,6 +77,7 @@ const appRoutes: Routes = [
     DetalleProductoComponent,
     ResumenOrdenesComponent,
     ResumenDetalleOrdenComponent,
+    ReporteComponent,
 
   ],
   imports: [

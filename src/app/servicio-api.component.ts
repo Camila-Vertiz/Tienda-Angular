@@ -215,7 +215,10 @@ export class ServiciosapiService {
                 });
         });
     }
-
+    listarOrdenPorCliente(id: any) {
+        return this.http.get<any[]>(this.url + '/orden/listar/' + id);
+    }
+    
     buscarOrdenPorCliente(id: any) {
         return new Promise((resolve, reject) => {
             this.http.get(this.url + '/orden/listar/' + id)
