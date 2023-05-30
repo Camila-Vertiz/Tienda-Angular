@@ -19,6 +19,16 @@ export class OrdenComponent {
   idOrden: any;
   insertado = false;
 
+  public nCarrito:{
+    id_producto: number,
+    id_usuario: number,
+    cantidad: number,
+    nombre: string;
+    precio: number,
+    total: number,
+    estado: number,
+  }[] = [];
+
   public orden = {
     "id_usuario": 1,
     "numero": "",
@@ -47,7 +57,7 @@ export class OrdenComponent {
   listarOrden() {
     this.apiService.listarOrden().subscribe(data => {
       this.ordenes = data;
-      console.log(this.ordenes);
+      // console.log(this.ordenes);
       this.maxNumero();
     });
   }
@@ -80,11 +90,11 @@ export class OrdenComponent {
     const id_user = localStorage.getItem('id_user');
     this.apiService.buscarUsuarioPorId(id_user)
       .then(data => {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         const jsonRespuesta = JSON.stringify(data);
         const Respuesta = JSON.parse(jsonRespuesta);
         this.cliente = Respuesta[0];
-        console.log(this.cliente);
+        // console.log(this.cliente);
       })
       .catch(error => {
         //console.log(error);
@@ -98,7 +108,7 @@ export class OrdenComponent {
         const jsonRespuesta = JSON.stringify(data);
         const Respuesta = JSON.parse(jsonRespuesta);
         this.carrito = Respuesta;
-        console.log(this.carrito);
+        // console.log(this.carrito);
         this.asc();
         this.calcularTotal();
       })
@@ -122,11 +132,9 @@ export class OrdenComponent {
     this.orden.numero = this.numeroConcatenado;
     this.orden.total = this.total;
 
-    console.log(this.orden);
+    // console.log(this.orden);
 
     await this.insertarOrden();
-    console.log(this.insertado);
-    this.insertarDetalleOrden()
 
   }
 
@@ -151,6 +159,7 @@ export class OrdenComponent {
         total: item.total
       };
     });
+    this.insertarDetalleOrden();
 
     console.log("Array de carritoDetalle:", this.detalleOrden);
   }
@@ -160,18 +169,49 @@ export class OrdenComponent {
     this.idOrden = this.ordenes.reduce((max, orden) => {
       return orden.id_orden > max ? orden.id_orden : max;
     }, this.ordenes[0].id_orden);
-    console.log(this.idOrden)
+    this.idOrden++;
+    console.log("ultima orden: " + this.idOrden)
   }
 
   insertarDetalleOrden() {
-    this.apiService.insertarDetalleOrden(this.detalleOrden)
-      .then(data => {
+    console.log(this.detalleOrden)
+    // this.apiService.insertarDetalleOrden(this.detalleOrden)
+    //   .then(data => {
+    //     this.alertaSuccess();
+    //   }).catch(async er => {
+    //     console.log("error insertarDetalleOrden:" + er);
+    //   });
+
+
+    this.detalleOrden.forEach(async (detalle) => {
+      try {
+        await this.apiService.insertarDetalleOrden(detalle);
         this.alertaSuccess();
-      }).catch(async er => {
-        console.log("error insertarDetalleOrden:" + er);
-      });
+      } catch (error) {
+        console.log("error insertarDetalleOrden:" + error);
+      }
+    });
+    this.actualizarCarrito();
   }
 
+  actualizarCarrito() {
+    this.carrito.forEach(item => {
+      item.estado = 0;
+    });
+    console.log(this.carrito);
+    this.nCarrito=this.carrito;
+
+    this.carrito.forEach(async (item) => {
+      try {
+        await this.apiService.insertarCarrito(item);
+      } catch (error) {
+        console.log("error insertarDetalleOrden:" + error);
+      }
+    });
+
+  }
+
+  
 
 
   alertaSuccess() {
@@ -181,7 +221,7 @@ export class OrdenComponent {
       text: "Orden creada con éxito",
       confirmButtonText: 'OK',
     }).then(() => {
-      // location.reload();
+      this.router.navigate(['/home']);
     });
   }
 
