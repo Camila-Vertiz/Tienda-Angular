@@ -31,27 +31,27 @@ import { DetalleProductoComponent } from '../app/modules/detalle-producto/detall
 import { ResumenOrdenesComponent } from '../app/modules/resumen-ordenes/resumen-ordenes.component';
 import { ResumenDetalleOrdenComponent } from '../app/modules/resumen-detalle-orden/resumen-detalle-orden.component';
 import { ReporteComponent } from '../app/modules/reporte/reporte.component';
-import { AuthGuard, NoAuthGuard } from './core';
+import { AuthGuardUser, AuthGuardAdmi } from './core';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard]},
+  { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuardUser]},
   { path: 'sign-up', component: SignUpComponent},
   { path: 'cases', component: CasesComponent},
   { path: 'celulares', component: CelularesComponent},
-  { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
-  { path: 'detalle-compra', component: DetalleCompraComponent,canActivate: [AuthGuard]},
-  { path: 'producto', component: ProductoComponent, canActivate: [AuthGuard]},
-  { path: 'orden', component: OrdenComponent, canActivate: [AuthGuard]},
-  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  { path: 'categoria', component: CategoriaComponent, canActivate: [AuthGuard]},
-  { path: 'mostrar-productos', component: MostrarProductosComponent,canActivate: [AuthGuard]},
-  { path: 'detalle-producto', component: DetalleProductoComponent,canActivate: [AuthGuard]},
-  { path: 'resumen-ordenes', component: ResumenOrdenesComponent, canActivate: [AuthGuard]},
-  { path: 'resumen-detalle-orden', component: ResumenDetalleOrdenComponent, canActivate: [AuthGuard]},
-  { path: 'reporte', component: ReporteComponent, canActivate: [AuthGuard]},
+  { path: 'compras', component: ComprasComponent, canActivate: [AuthGuardUser]},
+  { path: 'detalle-compra', component: DetalleCompraComponent,canActivate: [AuthGuardUser]},
+  { path: 'producto', component: ProductoComponent, canActivate: [AuthGuardAdmi]},
+  { path: 'orden', component: OrdenComponent,},
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuardAdmi]},
+  { path: 'categoria', component: CategoriaComponent, canActivate: [AuthGuardAdmi]},
+  { path: 'mostrar-productos', component: MostrarProductosComponent,canActivate: [AuthGuardAdmi]},
+  { path: 'detalle-producto', component: DetalleProductoComponent,canActivate: [AuthGuardUser]},
+  { path: 'resumen-ordenes', component: ResumenOrdenesComponent, canActivate: [AuthGuardAdmi]},
+  { path: 'resumen-detalle-orden', component: ResumenDetalleOrdenComponent, canActivate: [AuthGuardAdmi]},
+  { path: 'reporte', component: ReporteComponent, canActivate: [AuthGuardAdmi]},
 ];
 
 @NgModule({
