@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ServiciosapiService } from '../servicio-api.component';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import Swal from 'sweetalert2'
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-detalleCompra',
@@ -35,5 +37,19 @@ export class DetalleCompraComponent {
       }).catch(async er => {
         console.log("error buscarPorId:" + er);
       });
+  }
+
+  generarPDF() {
+    const DATA = document.getElementById('detalle'); // ID de tu tabla HTML
+    if (DATA) {
+      html2canvas(DATA).then(canvas => {
+        const imgWidth = 208;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        const contentDataURL = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+        pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save('detalle-compra.pdf');
+      });
+    }
   }
 }
