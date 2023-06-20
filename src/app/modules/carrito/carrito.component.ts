@@ -9,8 +9,9 @@ import Swal from 'sweetalert2'
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoComponent {
-  total: any;
+  total = 0.00;
   carrito: any[];
+  disable = true;
 
   public item = {
     "id_carrito": 1,
@@ -40,6 +41,7 @@ export class CarritoComponent {
         this.carrito = Respuesta;
         this.asc();
         this.calcularTotal();
+        this.disableButton();
       })
       .catch(error => {
         console.log(error);
@@ -53,6 +55,17 @@ export class CarritoComponent {
 
   calcularTotal() {
     this.total = this.carrito.reduce((accumulator, element) => accumulator + element.total, 0);
+  }
+
+  disableButton() {
+    if (this.total <1) {
+      this.disable = true;
+      console.log("disable: ", this.disable)
+    }
+    else {
+      this.disable = false;
+      console.log("disable: ", this.disable)
+    }
   }
 
   alertaBefDelete(item: any) {

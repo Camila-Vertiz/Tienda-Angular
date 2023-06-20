@@ -4,7 +4,7 @@
 <body>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" id="detalle">
 
 
         <!-- Page Heading/Breadcrumbs -->
@@ -17,6 +17,7 @@
             <li class="breadcrumb-item"><a routerLink="/compras" style="color:black">Compras</a></li>
             <li class="breadcrumb-item active">Detalle de Compra</li>
         </ol>
+        <br> <button class="btn btn-warning" (click)="generarPDF()">Generar PDF</button> <br> <br>
 
         <!-- Blog Post -->
         <div class="card mb-4">

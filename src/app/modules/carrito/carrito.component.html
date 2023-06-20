@@ -51,7 +51,7 @@
                             <li class="list-group-item">
                                 <h5>S/. {{total| number:'1.2-2'}}</h5>
                             </li>
-                            <a routerLink="/orden" class="btn btn-warning">Ver Orden</a>
+                            <button routerLink="/orden" class="btn btn-warning" [disabled]="disable">Ver Orden</button>
                         </ul>
                     </div>
 
